@@ -14,7 +14,6 @@ end
 
 local function serve(req)
     local data = json.decode(req.post_data)
-    print(req.post_data)
     local response = vohttp.response.Response:new()
 
     local f = METHODS[data["method"]:sub(4)]
@@ -35,7 +34,6 @@ local function serve(req)
     end
 
     response.body = json.encode(serve)
-    print(response.body)
 
     return response
 end
