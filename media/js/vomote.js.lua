@@ -10,6 +10,11 @@ function vo(method, args) {
     $.jsonRPC.request(method, {params: [args]});
 }
 
+function vo_reload() {
+    vo("reload");
+    window.setInterval(function() {location.reload(true)}, 2500);
+}
+
 function update() {
     $.getJSON("/pull/", function(data) {
         $.each(data, function(key, value) {
@@ -18,7 +23,7 @@ function update() {
                 $.each(data[key], function(_, p) {
                     $("#sector tr:last").after(
                       $.format(
-                      "<tr id=\"targ_{0}\"><td>{1} [{3}%]</td><td>{2}m</tr>",
+                      "<tr id=\"targ_{0}\" class=\"nation{4}\"><td>{1} [{3}%]</td><td>{2}m</tr>",
                       p));
                     $("#targ_" + p[0]).on("click", function() { vo('target', p[0]) });
                 });

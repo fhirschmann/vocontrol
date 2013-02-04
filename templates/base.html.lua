@@ -6,7 +6,7 @@ return function(context)
 <head>
     <meta charset="utf-8" />
     <title>vomote</title>
-    <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.0/themes/base/jquery-ui.css" />
+    <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.0/themes/vader/jquery-ui.css" />
     <script src="http://code.jquery.com/jquery-1.8.3.js"></script>
     <script src="http://code.jquery.com/ui/1.10.0/jquery-ui.js"></script>
     <script src="http://vomote.0x0b.de/js/jquery.utils.min.js"></script>
@@ -22,7 +22,7 @@ return function(context)
         }, 2500);
         update();
 
-        $("#vo_reload").live("click", function() { vo('reload') });
+        $("#vo_reload").live("click", vo_reload);
     </script>
 </head>
 <body>
