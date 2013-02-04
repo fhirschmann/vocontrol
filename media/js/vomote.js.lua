@@ -43,6 +43,7 @@ function update() {
                     line = line.replace(/LOC/g, "</span>");
                     $("#chat_box").append(line);
                     $("#chat_box").append("<br />");
+                    $("#chat_box").scrollTop($("#chat_box")[0].scrollHeight);
                 });
             }
         });
