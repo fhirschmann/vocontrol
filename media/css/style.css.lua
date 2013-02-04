@@ -47,7 +47,7 @@ table tbody {
 #chat_send {
 }
 
-#chat_box, #chat_send {
+#chat_box, #chat_msg {
     border: 1px solid #000;
     background-color: #1e1e1e;
     color: #efefef;

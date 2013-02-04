@@ -7,7 +7,7 @@ $.jsonRPC.setup({
 });
 
 function vo(method, args) {
-    $.jsonRPC.request(method, {params: [args]});
+    $.jsonRPC.request(method, {params: args});
 }
 
 function vo_reload() {

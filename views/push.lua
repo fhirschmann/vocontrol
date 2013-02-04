@@ -5,6 +5,7 @@ local json = dofile("lib/json.lua")
 local METHODS = {
     reload=function() gkinterface.GKProcessCommand("vomote reload") end,
     target=function(pid) radar.SetRadarSelection(GetPlayerNodeID(pid), GetPrimaryShipIDOfPlayer(pid)) end,
+    chat=SendChat,
 }
 
 local function pack(...)
@@ -20,7 +21,7 @@ local function serve(req)
     local serve = {jsonrpc="2.0", id=req.post_data["id"]}
 
     if f then
-        local result = pack(pcall(f, unpack(data["params"])))
+        local result = pack(pcall(f, unpack(data["params"] or {})))
         local status = result[1]
         table.remove(result, 1)
 

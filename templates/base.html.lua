@@ -14,15 +14,27 @@ return function(context)
     <script src="/media/js/vomote.js"></script>
     <link rel="stylesheet" href="/media/css/style.css" />
     <script>
+
         $(function() {
             $( "#tabs" ).tabs();
-        });
-        setInterval(function() {
-            update();
-        }, 2500);
-        update();
+            $("#vo_reload").live("click", vo_reload);
 
-        $("#vo_reload").live("click", vo_reload);
+            update();
+
+            $("#chat_form").submit(function(e) {
+                e.stopImmediatePropagation();
+                e.preventDefault();
+                vo("chat", [$("#chat_msg").val(), $("#chat_dest").val()]);
+                $("#chat_msg").val("");
+
+                return false;
+            });
+
+            setInterval(function() {
+                update();
+            }, 2500);
+
+        });
     </script>
 </head>
 <body>
@@ -46,17 +58,34 @@ return function(context)
             </table>
         </div>
         <div id="tabs-2">
-            <p>
-            <div id="chat_box">
-            </div>
-            <form>
-            <input type="text" name="chat_msg" id="chat_send" />
+            <form id="chat_form">
+            <table>
+                <tr>
+                    <td colspan="3">
+                        <div id="chat_box"></div>
+                    </td>
+                </tr>
+                <tr>
+                    <td width="100%">
+                        <input type="text" id="chat_msg" />
+                    </td>
+                    <td>
+                        <select name="chat_dest" id="chat_dest">
+                            <option value="SECTOR">Sector</option>
+                            <option value="CHANNEL" selected>Channel</option>
+                            <option value="GROUP">Group</option>
+                            <option value="GUILD">Guild</option>
+                            <option value="SYSTEM">System</option>
+                        </select>
+                    </td>
+                    <td>
+                        <input type="submit" />
+                    </td>
+                </tr>
+            </table>
             </form>
-            </p>
         </div>
         <div id="tabs-3">
-            <p>
-            </p>
         </div>
         <div id="tabs-4">
             <p>
