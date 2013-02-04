@@ -18,12 +18,13 @@
 --   compat-5.1 if using Lua 5.0
 -----------------------------------------------------------------------------
 
---Edited by Scuba Steve 9.0 to make this play nice with VO plugins
+-- Edited by Scuba Steve 9.0 to make this play nice with VO plugins
+-- isArray backported from upstream by Fabian Hirschmann
 
 -----------------------------------------------------------------------------
 -- Module declaration
 -----------------------------------------------------------------------------
-declare("json", {})
+local json = {}
 -----------------------------------------------------------------------------
 -- Internal, PRIVATE functions.
 -- Following a Python-like convention, I have prefixed all these 'PRIVATE'
@@ -208,22 +209,23 @@ local function _isEncodable(o)
   return type(o)=='string' or type(o)=='boolean' or type(o)=='number' or type(o)=='nil' or type(o)=='table'
 end
 
-
--- Determines whether the given Lua type is an array or a table / dictionary.
--- We consider any table an array if it has indexes 1..n for its n items, and no
--- other data in the table.
--- I think this method is currently a little 'flaky', but can't think of a good way around it yet...
--- @param t The table to evaluate as an array
--- @return boolean True if the table can be represented as an array, false otherwise
-local function _isArray(t)
-  local n = table.getn(t)
-  local m = 0
+function _isArray(t)
+  -- Next we count all the elements, ensuring that any non-indexed elements are not-encodable 
+  -- (with the possible exception of 'n')
+  local maxIndex = 0
   for k,v in pairs(t) do
-    if (_isEncodable(v)) then
-      m = m + 1
-    end
-  end
-  return ((m==n) or ((m==n+1) and (t['n']==n)))
+    if (type(k)=='number' and math.floor(k)==k and 1<=k) then	-- k,v is an indexed pair
+      if (not _isEncodable(v)) then return false end	-- All array elements must be encodable
+      maxIndex = math.max(maxIndex,k)
+    else
+      if (k=='n') then
+        if v ~= table.getn(t) then return false end  -- False if n does not hold the number of elements
+      else -- Else of (k=='n')
+        if _isEncodable(v) then return false end
+      end  -- End of (k~='n')
+    end -- End of k,v not an indexed pair
+  end  -- End of loop across all pairs
+  return true, maxIndex
 end
 
 -----------------------------------------------------------------------------
@@ -252,7 +254,7 @@ local function encode (v)
   if type(v)=='table' then
     local rval = {}
     -- Consider arrays separately
-    local bArray = _isArray(v)
+    local bArray, _ = _isArray(v)
     for i,j in pairs(v) do
       if (not (bArray)) or (i~='n') then
         if _isEncodable(i) and _isEncodable(j) then
@@ -318,3 +320,5 @@ end
 --This exports the functions.
 json.encode = encode
 json.decode = decode
+
+return json
