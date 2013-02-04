@@ -1,5 +1,3 @@
-dofile("lib/json.lua")
-
 server = vohttp.Server:new()
 
 for k, v in pairs(dofile("urls.lua")) do
