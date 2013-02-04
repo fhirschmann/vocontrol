@@ -9,45 +9,57 @@ return function(context)
     <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.0/themes/base/jquery-ui.css" />
     <script src="http://code.jquery.com/jquery-1.8.3.js"></script>
     <script src="http://code.jquery.com/ui/1.10.0/jquery-ui.js"></script>
+    <script src="http://vomote.0x0b.de/js/jquery.utils.min.js"></script>
+    <script src="http://vomote.0x0b.de/js/jquery.jsonrpc.js"></script>
     <script src="/media/js/vomote.js"></script>
     <link rel="stylesheet" href="/media/css/style.css" />
     <script>
         $(function() {
             $( "#tabs" ).tabs();
         });
-        setInterval(update, 3000);
+        setInterval(function() {
+            update();
+        }, 2500);
+        update();
+
+        $("#vo_reload").live("click", function() { vo('reload') });
     </script>
 </head>
 <body>
     <div id="tabs">
         <ul>
-            <li><a href="#tabs-1">Test</a></li>
+            <li><a href="#tabs-1">Sector</a></li>
             <li><a href="#tabs-2">Console</a></li>
             <li><a href="#tabs-3">Map</a></li>
             <li><a href="#tabs-4">Debug</a></li>
         </ul>
         <div id="tabs-1">
-            <p>
-            Target: <span id="target"></span>
-            </p>
+            <table id="sector">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Distance</th>
+                    </tr>
+                </thead>
+                <tbody>
+                </tbody>
+            </table>
         </div>
         <div id="tabs-2">
             <p>
-            asdfasfd
             </p>
         </div>
         <div id="tabs-3">
             <p>
-            asjkdf
             </p>
         </div>
         <div id="tabs-4">
             <p>
-            <pre id="debug">
-            </pre>
+            <button id="vo_reload">Reload Interface</button>
             </p>
         </div>
     </div>
+    <pre id="debug"></pre>
 </body>
 </html>
 ]]
