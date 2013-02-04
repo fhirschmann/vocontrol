@@ -29,7 +29,7 @@ return function(context)
     <div id="tabs">
         <ul>
             <li><a href="#tabs-1">Sector</a></li>
-            <li><a href="#tabs-2">Console</a></li>
+            <li><a href="#tabs-2">Chat</a></li>
             <li><a href="#tabs-3">Map</a></li>
             <li><a href="#tabs-4">Debug</a></li>
         </ul>
@@ -47,6 +47,11 @@ return function(context)
         </div>
         <div id="tabs-2">
             <p>
+            <div id="chat_box">
+            </div>
+            <form>
+            <input type="text" name="chat_msg" id="chat_send" />
+            </form>
             </p>
         </div>
         <div id="tabs-3">

@@ -38,5 +38,21 @@ table tbody {
 .unaligned, .nation4 {
     color: #909090;
 }
+
+#chat_box {
+    overflow: auto;
+    height: 400px;
+}
+
+#chat_send {
+}
+
+#chat_box, #chat_send {
+    border: 1px solid #000;
+    background-color: #1e1e1e;
+    color: #efefef;
+    width: 100%;
+}
+
 ]]
 return css
