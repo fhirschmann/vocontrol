@@ -11,6 +11,7 @@ return function(context)
     <script src="http://code.jquery.com/ui/1.10.0/jquery-ui.js"></script>
     <script src="http://vomote.0x0b.de/js/jquery.utils.min.js"></script>
     <script src="http://vomote.0x0b.de/js/jquery.jsonrpc.js"></script>
+    <script src="https://github.com/jch/jquery.inputHistory/raw/master/jquery.inputHistory.min.js"></script>
     <script src="/media/js/vomote.js"></script>
     <link rel="stylesheet" href="/media/css/style.css" />
 </head>
@@ -44,7 +45,7 @@ return function(context)
                 </tr>
                 <tr>
                     <td width="100%">
-                        <input type="text" id="chat_msg" />
+                        <input type="text" id="chat_msg" autocomplete="off" />
                     </td>
                     <td>
                         <select name="chat_dest" id="chat_dest">

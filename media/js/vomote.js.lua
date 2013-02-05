@@ -16,8 +16,9 @@ function vo_reload() {
 }
 
 $(function() {
-    $( "#tabs" ).tabs();
+    $("#tabs").tabs();
     $("#vo_reload").live("click", vo_reload);
+    $("#chat_msg").inputHistory({size: 30});
     $("#chat_form").live("keydown", function(e) {
         var keyCode = e.keyCode || e.which;
 
