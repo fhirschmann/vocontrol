@@ -1,4 +1,5 @@
 -- TODO: race conditions are possible
+-- TODO: only one client possible right now
 
 local json = dofile("lib/json.lua")
 local change = {}
