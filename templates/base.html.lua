@@ -19,12 +19,11 @@ return function(context)
 <body>
     <div id="tabs">
         <ul>
-            <li><a href="#tabs-1">Sector</a></li>
-            <li><a href="#tabs-2">Chat</a></li>
-            <li><a href="#tabs-3">Map</a></li>
-            <li><a href="#tabs-4">Debug</a></li>
+            <li><a href="#tab-1">Sector</a></li>
+            <li><a href="#tab-2">Chat</a></li>
+            <li><a href="#tab-4">Debug</a></li>
         </ul>
-        <div id="tabs-1">
+        <div id="tab-1">
             <table id="sector">
                 <thead>
                     <tr>
@@ -36,7 +35,7 @@ return function(context)
                 </tbody>
             </table>
         </div>
-        <div id="tabs-2">
+        <div id="tab-2">
             <form id="chat_form">
             <table>
                 <tr>
@@ -64,9 +63,7 @@ return function(context)
             </table>
             </form>
         </div>
-        <div id="tabs-3">
-        </div>
-        <div id="tabs-4">
+        <div id="tab-4">
             <p>
             <button id="vo_reload">Reload Interface</button>
             </p>
