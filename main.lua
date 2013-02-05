@@ -1,16 +1,44 @@
+local voutil = dofile("util.lua")
+
+-- Server setup
 server = vohttp.Server:new()
 
 for k, v in pairs(dofile("urls.lua")) do
     server:add_route(k, v)
 end
 
+local function start(port)
+    vohttp.DEBUG = gkini.ReadInt("vomote", "debug", 0) == 1
+    server:start(port)
+end
+
 local port = gkini.ReadInt("vomote", "port", 9001)
 local autostart = gkini.ReadInt("vomote", "autostart", 0)
+
+-- Command Line Interface
+local VALID_OPTIONS = {"autostart", "debug"}
+
+local function option_onoff(name, arg)
+    if arg == nil then
+        if gkini.ReadInt("vomote", name, 0) == 0 then
+            return option_onoff(name, "1")
+        else
+            return option_onoff(name, "0")
+        end
+    end
+    if arg == "on" or arg == "1" then
+        gkini.WriteInt("vomote", name, 1)
+        print("vomote: "..name.." is now enabled")
+    else
+        gkini.WriteInt("vomote", name, 0)
+        print("vomote: "..name.." is now disabled")
+    end
+end
 
 local function cli(data, args)
     if args then
         if args[1] == "start" then
-            server:start(port)
+            start(port)
             print("vomote: now listening on port "..port)
         elseif args[1] == "stop" then
             server:stop()
@@ -23,7 +51,7 @@ local function cli(data, args)
             end
         elseif args[1] == "restart" then
             server:stop()
-            server:start(port)
+            start(port)
         elseif args[1] == "reload" then
             local listening = server.listening
             if listening then
@@ -32,22 +60,20 @@ local function cli(data, args)
 
             ReloadInterface()
         elseif args[1] == "set" then
-            if args[2] == "autostart" then
-                if args[3] == "1" or args[3] == "on" then
-                    print("vomote: autostart enabled")
-                    gkini.WriteInt("vomote", "autostart", 1)
-                else
-                    gkini.WriteInt("vomote", "autostart", 0)
-                    print("vomote: autostart disabled")
-                end
+            if voutil.table.contains_value(VALID_OPTIONS, args[2]) then
+                option_onoff(args[2], args[3])
+            else
+                print("No such option")
             end
         elseif args[1] == "help" then
             if args[2] == "set" then
                 print([[
 usage: vomote set {autostart}
 
-where:
-    autostart {0,1}     enable/disable autostart]])
+where:]])
+                for _, item in pairs(VALID_OPTIONS) do
+                    print(item.." {0,1}    enable/disable "..item)
+                end
             else
                 print([[
 usage: vomote {start,stop,restart,reload,set,help} ...
@@ -68,5 +94,5 @@ end
 RegisterUserCommand("vomote", cli)
 
 if autostart == 1 then
-    server:start(port)
+    start(port)
 end
