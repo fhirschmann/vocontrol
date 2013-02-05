@@ -38,7 +38,11 @@ $(function() {
         e.stopImmediatePropagation();
         e.preventDefault();
         if ($("#chat_msg").val() != "") {
-            vo("chat", [$("#chat_msg").val(), $("#chat_dest").val()]);
+            if ($("#chat_msg").val().charAt(0) == "/") {
+                vo("processcmd", [$("#chat_msg").val().slice(1)]);
+            } else {
+                vo("chat", [$("#chat_msg").val(), $("#chat_dest").val()]);
+            }
             $("#chat_msg").val("");
         }
 

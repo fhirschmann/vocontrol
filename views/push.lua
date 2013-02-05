@@ -7,6 +7,7 @@ local METHODS = {
     target=function(pid) radar.SetRadarSelection(GetPlayerNodeID(pid), GetPrimaryShipIDOfPlayer(pid)) end,
     chat=SendChat,
     tabcomplete=TabCompleteName,
+    processcmd=gkinterface.GKProcessCommand,
 }
 
 local function pack(...)
