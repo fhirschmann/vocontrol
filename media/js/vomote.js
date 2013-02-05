@@ -19,6 +19,7 @@ function vo_target(pid) {
 
 $(function() {
     $("#tabs").tabs();
+    $("#tabs-3").tabs();
 
     $("#chat_msg").keypress(function(event) {
         var sel = null;
@@ -40,6 +41,11 @@ $(function() {
             $("#chat_dest").val(sel);
         }
     });
+    /*
+    $("#map_systems").on("click", "area", function(e) {
+        alert($(this).attr("alt"));
+    });
+    */
 
     $("#vo_reload").live("click", vo_reload);
     $("#chat_msg").inputHistory({size: 30});
