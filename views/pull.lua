@@ -52,7 +52,6 @@ local function serve(req)
 
     r.body = json.encode(queue:construct(last_query))
     queue:reset()
-    print(r.body)
     return r
 end
 
