@@ -13,42 +13,6 @@ return function(context)
     <script src="http://vomote.0x0b.de/js/jquery.jsonrpc.js"></script>
     <script src="/media/js/vomote.js"></script>
     <link rel="stylesheet" href="/media/css/style.css" />
-    <script>
-
-        $(function() {
-            $( "#tabs" ).tabs();
-            $("#vo_reload").live("click", vo_reload);
-            $("#chat_form").live("keydown", function(e) {
-                var keyCode = e.keyCode || e.which;
-
-                if (keyCode == 9) {
-                    e.preventDefault();
-                    var match = $("#chat_msg").val().match(/(\S+)$/);
-                    vo("tabcomplete", [match ? match[0] : ""], function(c) {
-                        if (c["result"][0] != null) {
-                            $("#chat_msg").val($("#chat_msg").val().replace(/\w*$/, c["result"][0]));
-                        }
-                    });
-                }
-            });
-
-            update();
-
-            $("#chat_form").submit(function(e) {
-                e.stopImmediatePropagation();
-                e.preventDefault();
-                vo("chat", [$("#chat_msg").val(), $("#chat_dest").val()]);
-                $("#chat_msg").val("");
-
-                return false;
-            });
-
-            setInterval(function() {
-                update();
-            }, 2500);
-
-        });
-    </script>
 </head>
 <body>
     <div id="tabs">

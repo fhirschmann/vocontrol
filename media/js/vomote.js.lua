@@ -15,6 +15,40 @@ function vo_reload() {
     vo("reload");
 }
 
+$(function() {
+    $( "#tabs" ).tabs();
+    $("#vo_reload").live("click", vo_reload);
+    $("#chat_form").live("keydown", function(e) {
+        var keyCode = e.keyCode || e.which;
+
+        if (keyCode == 9) {
+            e.preventDefault();
+            var match = $("#chat_msg").val().match(/(\S+)$/);
+            vo("tabcomplete", [match ? match[0] : ""], function(c) {
+                if (c["result"][0] != null) {
+                    $("#chat_msg").val($("#chat_msg").val().replace(/\w*$/, c["result"][0]));
+                }
+            });
+        }
+    });
+
+    update();
+
+    $("#chat_form").submit(function(e) {
+        e.stopImmediatePropagation();
+        e.preventDefault();
+        vo("chat", [$("#chat_msg").val(), $("#chat_dest").val()]);
+        $("#chat_msg").val("");
+
+        return false;
+    });
+
+    setInterval(function() {
+        update();
+    }, 2500);
+
+});
+
 function update() {
     $.getJSON("/pull/", function(data) {
         $.each(data, function(key, value) {
