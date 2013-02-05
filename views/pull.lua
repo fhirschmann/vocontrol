@@ -2,17 +2,19 @@
 -- TODO: only one client possible right now
 
 local json = dofile("lib/json.lua")
-local change = {}
+local Queue = dofile("queue.lua")
+
+local queue = Queue:new()
+
 
 -- Target change
 local function target(event, data)
-    change["target"] = GetTargetInfo()
+    queue:set("target", GetTargetInfo())
 end
 RegisterEvent(target, "TARGET_CHANGED")
 
 -- Chat Messages
 local function chat(event, data)
-    change["chat"] = change["chat"] or {}
     local add = {
         color="#"..chatinfo[event][1]:sub(2),
         formatstring=chatinfo[event]["formatstring"],
@@ -29,7 +31,7 @@ local function chat(event, data)
     if data["color"] then
         add["color"] = data["color"]:sub(2)
     end
-    table.insert(change["chat"], add)
+    queue:append("chat", add)
 end
 
 for k, _ in pairs(chatinfo) do
@@ -37,18 +39,23 @@ for k, _ in pairs(chatinfo) do
 end
 
 local function serve(req)
+    local last_query = tonumber(req.get_data["last_query"]) or nil
+
     local r = vohttp.response.Response:new()
     r.headers["Content-Type"] = "application/json"
+    --r.headers["Connection"] = "Keep-Alive"
 
-    change["sector"] = {}
+    local sector = {}
     ForEachPlayer(function(pid)
-        table.insert(change["sector"],
+        table.insert(sector,
                      {pid, GetPlayerName(pid), math.floor(GetPlayerDistance(pid) or 0),
                       math.floor(GetPlayerHealth(pid) or 100),
                       GetPlayerFaction(pid), GetPlayerFactionStanding(pid)}) end)
+    --queue:set("sector", sector)
 
-    r.body = json.encode(change)
-    change = {}
+    r.body = json.encode(queue:construct(last_query))
+    queue:reset()
+    print(r.body)
     return r
 end
 
