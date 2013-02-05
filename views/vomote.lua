@@ -1,5 +1,7 @@
 context = {}
-context["MEDIA_URL"] = "http://vomote.0x0b.de/"
+context["URL"] = gkini.ReadString("vomote", "url",
+    "https://raw.github.com/fhirschmann/vomote/master/media")
+
 
 template_base = dofile("templates/base.html.lua")(context)
 

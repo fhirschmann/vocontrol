@@ -51,7 +51,7 @@ local function serve(req)
                      {pid, GetPlayerName(pid), math.floor(GetPlayerDistance(pid) or 0),
                       math.floor(GetPlayerHealth(pid) or 100),
                       GetPlayerFaction(pid), GetPlayerFactionStanding(pid)}) end)
-    --queue:set("sector", sector)
+    queue:set("sector", sector)
 
     r.body = json.encode(queue:construct(last_query))
     queue:reset()

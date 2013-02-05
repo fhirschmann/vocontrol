@@ -62,18 +62,28 @@ local function cli(data, args)
         elseif args[1] == "set" then
             if voutil.table.contains_value(VALID_OPTIONS, args[2]) then
                 option_onoff(args[2], args[3])
+            elseif args[2] == "url" then
+                if args[3] == "reset" then
+                    gkini.WriteString("vomote", "url",
+                        "https://raw.github.com/fhirschmann/vomote/master/media")
+                else
+                    gkini.WriteString("vomote", "url", args[3])
+                end
             else
                 print("No such option")
             end
         elseif args[1] == "help" then
             if args[2] == "set" then
                 print([[
-usage: vomote set {autostart}
+usage: vomote set OPTION
 
-where:]])
+where OPTION is:]])
                 for _, item in pairs(VALID_OPTIONS) do
                     print(item.." {0,1}    enable/disable "..item)
                 end
+                print([[
+url {URL,reset}   (re)sets the media URL
+                ]])
             else
                 print([[
 usage: vomote {start,stop,restart,reload,set,help} ...

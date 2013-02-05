@@ -1,6 +1,3 @@
--- vim: set ft=javascript:
-return [[
-
 $.jsonRPC.setup({
     endPoint: "/push/",
     namespace: "vo"
@@ -127,4 +124,3 @@ function update() {
     });
 
 }
-]]

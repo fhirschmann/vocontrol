@@ -1,6 +1,7 @@
 -- vim: set ft=html:
 return function(context)
-    return [[
+    printtable(context)
+    return string.gsub([[
 <!doctype html>
 <html>
 <head>
@@ -13,8 +14,8 @@ return function(context)
     <script src="http://vomote.0x0b.de/js/jquery.jsonrpc.js"></script>
     <script src="https://github.com/jch/jquery.inputHistory/raw/master/jquery.inputHistory.min.js"></script>
     <script src="https://github.com/jeresig/jquery.hotkeys/raw/master/jquery.hotkeys.js"></script>
-    <script src="/media/js/vomote.js"></script>
-    <link rel="stylesheet" href="/media/css/style.css" />
+    <script src="$URL/js/vomote.js"></script>
+    <link rel="stylesheet" href="$URL/css/style.css" />
 </head>
 <body>
     <div id="tabs">
@@ -75,5 +76,5 @@ return function(context)
     <pre id="debug"></pre>
 </body>
 </html>
-]]
+]], "%$(%w+)", function(k) return context[k] end)
 end
