@@ -12,6 +12,7 @@ return function(context)
     <script src="http://vomote.0x0b.de/js/jquery.utils.min.js"></script>
     <script src="http://vomote.0x0b.de/js/jquery.jsonrpc.js"></script>
     <script src="https://github.com/jch/jquery.inputHistory/raw/master/jquery.inputHistory.min.js"></script>
+    <script src="https://github.com/jeresig/jquery.hotkeys/raw/master/jquery.hotkeys.js"></script>
     <script src="/media/js/vomote.js"></script>
     <link rel="stylesheet" href="/media/css/style.css" />
 </head>
