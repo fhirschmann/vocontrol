@@ -45,7 +45,6 @@ local function serve(req)
                      {pid, GetPlayerName(pid), math.floor(GetPlayerDistance(pid) or 0),
                       math.floor(GetPlayerHealth(pid) or 100),
                       GetPlayerFaction(pid), GetPlayerFactionStanding(pid)}) end)
-    change["sector"] = {}
 
     r.body = json.encode(change)
     change = {}
