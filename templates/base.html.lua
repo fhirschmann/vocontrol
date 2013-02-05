@@ -10,10 +10,9 @@ return function(context)
     <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.0/themes/vader/jquery-ui.css" />
     <script src="http://code.jquery.com/jquery-1.8.3.js"></script>
     <script src="http://code.jquery.com/ui/1.10.0/jquery-ui.js"></script>
-    <script src="http://vomote.0x0b.de/js/jquery.utils.min.js"></script>
-    <script src="http://vomote.0x0b.de/js/jquery.jsonrpc.js"></script>
-    <script src="https://github.com/jch/jquery.inputHistory/raw/master/jquery.inputHistory.min.js"></script>
-    <script src="https://github.com/jeresig/jquery.hotkeys/raw/master/jquery.hotkeys.js"></script>
+    <script src="$URL/js/jquery.strings.js"></script>
+    <script src="$URL/js/jquery.jsonrpc.js"></script>
+    <script src="$URL/js/jquery.inputHistory.min.js"></script>
     <script src="$URL/js/vomote.js"></script>
     <link rel="stylesheet" href="$URL/css/style.css" />
 </head>

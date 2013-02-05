@@ -64,8 +64,7 @@ local function cli(data, args)
                 option_onoff(args[2], args[3])
             elseif args[2] == "url" then
                 if args[3] == "reset" then
-                    gkini.WriteString("vomote", "url",
-                        "https://raw.github.com/fhirschmann/vomote/master/media")
+                    gkini.WriteString("vomote", "url", "")
                 else
                     gkini.WriteString("vomote", "url", args[3])
                 end
