@@ -17,6 +17,28 @@ function vo_reload() {
 
 $(function() {
     $("#tabs").tabs();
+
+    $("#chat_msg").keypress(function(event) {
+        var sel = null;
+        if ((event.which == 103 && event.ctrlKey)) {
+            event.preventDefault();
+            sel = "GUILD";
+        } else if ((event.which == 71 && event.ctrlKey)) {
+            event.preventDefault();
+            sel = "GROUP";
+        } else if ((event.which == 99 && event.ctrlKey)) {
+            event.preventDefault();
+            sel = "CHANNEL";
+        } else if ((event.which == 115 && event.ctrlKey)) {
+            event.preventDefault();
+            sel = "SECTOR";
+        }
+
+        if (sel != null) {
+            $("#chat_dest").val(sel);
+        }
+    });
+
     $("#vo_reload").live("click", vo_reload);
     $("#chat_msg").inputHistory({size: 30});
     $("#chat_form").live("keydown", function(e) {
