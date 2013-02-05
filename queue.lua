@@ -56,9 +56,6 @@ function Queue:construct(last_query)
     table.insert(self._past, copy)
     self._time2past[copy["timestamp"]] = table.getn(self._past)
 
-    printtable(self._past)
-    printtable(self._time2past)
-
     if not last_query then
         return self._past
     end
