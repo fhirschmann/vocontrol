@@ -26,8 +26,12 @@ $(function() {
             e.preventDefault();
             var match = $("#chat_msg").val().match(/(\S+)$/);
             vo("tabcomplete", [match ? match[0] : ""], function(c) {
-                if (c["result"][0] != null) {
-                    $("#chat_msg").val($("#chat_msg").val().replace(/\w*$/, c["result"][0]));
+                if (c["result"] != null) {
+                    var res = c["result"][0];
+
+                    // Enclose names with spaces in ""
+                    res = res.indexOf(" ") ? '"' + res + '"' : res;
+                    $("#chat_msg").val($("#chat_msg").val().replace(/\w*$/, res));
                 }
             });
         }
