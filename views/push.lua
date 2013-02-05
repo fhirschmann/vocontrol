@@ -1,5 +1,3 @@
--- TODO: race conditions are possible
-
 local json = dofile("lib/json.lua")
 
 local METHODS = {
