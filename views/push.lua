@@ -6,6 +6,7 @@ local METHODS = {
     reload=function() gkinterface.GKProcessCommand("vomote reload") end,
     target=function(pid) radar.SetRadarSelection(GetPlayerNodeID(pid), GetPrimaryShipIDOfPlayer(pid)) end,
     chat=SendChat,
+    tabcomplete=TabCompleteName,
 }
 
 local function pack(...)
@@ -34,6 +35,7 @@ local function serve(req)
     end
 
     response.body = json.encode(serve)
+    print(response.body)
 
     return response
 end

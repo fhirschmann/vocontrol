@@ -6,8 +6,8 @@ $.jsonRPC.setup({
     namespace: "vo"
 });
 
-function vo(method, args) {
-    $.jsonRPC.request(method, {params: args});
+function vo(method, args, cb) {
+    $.jsonRPC.request(method, {params: args, success: cb});
 }
 
 function vo_reload() {
