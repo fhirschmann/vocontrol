@@ -37,8 +37,10 @@ $(function() {
     $("#chat_form").submit(function(e) {
         e.stopImmediatePropagation();
         e.preventDefault();
-        vo("chat", [$("#chat_msg").val(), $("#chat_dest").val()]);
-        $("#chat_msg").val("");
+        if ($("#chat_msg").val() != "") {
+            vo("chat", [$("#chat_msg").val(), $("#chat_dest").val()]);
+            $("#chat_msg").val("");
+        }
 
         return false;
     });
