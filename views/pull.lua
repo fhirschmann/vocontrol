@@ -28,6 +28,9 @@ local function chat(event, data)
     if data["location"] then
         add["location"] = ShortLocationStr(data["location"])
     end
+    if data["color"] then
+        add["color"] = data["color"]:sub(2)
+    end
     table.insert(change["chat"], add)
 end
 for _, m in ipairs(WANTED_CHATS) do
