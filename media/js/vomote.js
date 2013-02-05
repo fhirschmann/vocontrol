@@ -19,7 +19,6 @@ function vo_target(pid) {
 
 $(function() {
     $("#tabs").tabs();
-    $("#tabs-3").tabs();
 
     $("#chat_msg").keypress(function(event) {
         var sel = null;
