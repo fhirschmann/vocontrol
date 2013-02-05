@@ -1,6 +1,8 @@
 body {
 	font-family: "Trebuchet MS", "Helvetica", "Arial",  "Verdana", "sans-serif";
 	font-size: 62.5%;
+    margin: 0;
+    padding: 0;
     background-color: #1f1f1f;
 }
 
@@ -39,10 +41,16 @@ table tbody {
 
 #chat_box {
     overflow: auto;
-    height: 400px;
+    height: 500px;
 }
 
-#chat_send {
+#tabs-1, #tabs-2, #tabs-3, #tabs-4 {
+    padding: 0;
+    margin: 0.6em;
+}
+
+#chat_msg {
+    width: 100%;
 }
 
 #chat_box, #chat_msg {
@@ -50,3 +58,5 @@ table tbody {
     background-color: #1e1e1e;
     color: #efefef;
 }
+
+
