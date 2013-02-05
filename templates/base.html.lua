@@ -58,7 +58,7 @@ return function(context)
                         </select>
                     </td>
                     <td>
-                        <input type="submit" />
+                        <input type="submit" value="send" />
                     </td>
                 </tr>
             </table>
