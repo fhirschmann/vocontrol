@@ -1,8 +1,5 @@
 -- TODO: race conditions are possible
 
-local WANTED_CHATS = {"CHANNEL", "CHANNEL_ACTIVE", "GROUP", "GUILD",
-                      "PRIVATE", "PRINT", "SECTOR"}
-
 local json = dofile("lib/json.lua")
 local change = {}
 
@@ -33,10 +30,10 @@ local function chat(event, data)
     end
     table.insert(change["chat"], add)
 end
-for _, m in ipairs(WANTED_CHATS) do
-    RegisterEvent(chat, "CHAT_MSG_"..m)
-end
 
+for k, _ in pairs(chatinfo) do
+    RegisterEvent(chat, k)
+end
 
 local function serve(req)
     local r = vohttp.response.Response:new()
