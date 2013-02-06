@@ -17,6 +17,18 @@ function vo_target(pid) {
     $("#targ_" + pid).effect("highlight", {color: "#424242"}, 1500);
 }
 
+function health2color(health) {
+    if (health > 80) {
+        return "health-10";
+    } else if (health > 50) {
+        return "health-9";
+    } else if (health > 20) {
+        return "health-8";
+    } else {
+        return "health-7";
+    }
+}
+
 $(function() {
     $("#tabs").tabs();
 
@@ -104,7 +116,8 @@ function update() {
                           '<tr id="targ_{0}" class="nation{4}">' +
                           '<td>{1}</td>' +
                           '<td>' + ((p[2] == '-1') ? '' : '{2}m') + '</td>' +
-                          '<td>' + ((p[3] == '-1') ? '' : '{3}') + '</td>' +
+                          '<td class="' + health2color(p[3]) + '">' + 
+                              ((p[3] == '-1') ? '' : '{3}') + '</td>' +
                           '<td>{5}</td>' +
                           '</tr>',
                           p));

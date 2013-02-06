@@ -63,6 +63,22 @@ table tbody {
     border:1px solid #2e2e2e;
 }
 
+.health-10 {
+    color: #66a85e;
+}
+
+.health-9 {
+    color: #d1ce00;
+}
+
+.health-8 {
+    color: #c73838;
+}
+
+.health-7 {
+    color: #f24646;
+}
+
 .map_system_inner{
     text-align:center;
     cursor:crosshair;
