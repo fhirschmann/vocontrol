@@ -1,6 +1,5 @@
 -- vim: set ft=html:
 return function(context)
-    printtable(context)
     return string.gsub([[
 <!doctype html>
 <html>
@@ -29,6 +28,8 @@ return function(context)
                     <tr>
                         <th>Name</th>
                         <th>Distance</th>
+                        <th>Health</th>
+                        <th>Faction</th>
                     </tr>
                 </thead>
                 <tbody>

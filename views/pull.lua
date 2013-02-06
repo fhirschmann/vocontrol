@@ -10,6 +10,18 @@ local function target(event, data)
 end
 RegisterEvent(target, "TARGET_CHANGED")
 
+--- Get info for a player.
+-- @return a tuple (id, name, dist, health, faction_id, faction_name)
+local function player_info(pid)
+    return {
+        pid,
+        GetPlayerName(pid),
+        math.ceil(GetPlayerDistance(pid) or -1),
+        math.ceil(GetPlayerHealth(pid)),
+        GetPlayerFaction(pid),
+        FactionName[GetPlayerFaction(pid)]}
+end
+
 -- Chat Messages
 local function chat(event, data)
     local add = {
@@ -43,11 +55,7 @@ local function serve(req)
     --r.headers["Connection"] = "Keep-Alive"
 
     local sector = {}
-    ForEachPlayer(function(pid)
-        table.insert(sector,
-                     {pid, GetPlayerName(pid), math.floor(GetPlayerDistance(pid) or 0),
-                      math.floor(GetPlayerHealth(pid) or 100),
-                      GetPlayerFaction(pid), GetPlayerFactionStanding(pid)}) end)
+    ForEachPlayer(function(pid) table.insert(sector, player_info(pid)) end)
     queue:set("sector", sector)
 
     r.body = json.encode(queue:construct(last_query))
