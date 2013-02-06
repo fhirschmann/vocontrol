@@ -34,7 +34,6 @@ local function serve(req)
     end
 
     response.body = json.encode(serve)
-    print(response.body)
 
     return response
 end
