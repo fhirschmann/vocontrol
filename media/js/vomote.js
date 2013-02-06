@@ -108,6 +108,10 @@ $(function() {
 
 var last_query = null;
 
+function format_player(p) {
+    return (p[6] ? "[" + p[6] + "] " : "") + p[1]
+}
+
 function update() {
     $.getJSON("/pull/?last_query=" + last_query, function(queries) {
         last_query = queries[queries.length - 1]["timestamp"];
@@ -119,9 +123,9 @@ function update() {
                         $("#sector tr:last").after(
                           $.format(
                           '<tr id="targ_{0}" class="nation{4}">' +
-                          '<td>{1}</td>' +
+                          '<td>' + format_player(p) + '</td>' +
                           '<td>' + ((p[2] == '-1') ? '' : '{2}m') + '</td>' +
-                          '<td class="' + health2color(p[3]) + '">' + 
+                          '<td class="' + health2color(p[3]) + '">' +
                               ((p[3] == '-1') ? '' : '{3}') + '</td>' +
                           '<td>{5}</td>' +
                           '</tr>',
@@ -146,6 +150,9 @@ function update() {
                         $("#chat_box").append("<br />");
                         $("#chat_box").scrollTop($("#chat_box")[0].scrollHeight);
                     });
+                } else if (key == "player") {
+                    $("#player-name").addClass("nation" + data[key][4]);
+                    $("#player-name").html(format_player(data[key]));
                 }
             });
         });

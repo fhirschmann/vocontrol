@@ -35,6 +35,7 @@ return function(context)
                     </ul>
                 </div>
                 <ul class="nav pull-right">
+                    <li><a><span id="player-name" style="display:inline"></span></a></li>
                     <li class="divider-vertical"></li>
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">Tools <b class="caret"></b></a>

@@ -19,7 +19,8 @@ local function player_info(pid)
         math.ceil(GetPlayerDistance(pid) or -1),
         math.ceil(GetPlayerHealth(pid)),
         GetPlayerFaction(pid),
-        FactionName[GetPlayerFaction(pid)]}
+        FactionName[GetPlayerFaction(pid)],
+        GetGuildTag(pid)}
 end
 
 -- Chat Messages
@@ -57,6 +58,10 @@ local function serve(req)
     local sector = {}
     ForEachPlayer(function(pid) table.insert(sector, player_info(pid)) end)
     queue:set("sector", sector)
+
+    if not last_query then
+        queue:set("player", player_info(GetCharacterIDByName(GetPlayerName())))
+    end
 
     r.body = json.encode(queue:construct(last_query))
     queue:reset()
