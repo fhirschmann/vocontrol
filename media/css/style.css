@@ -1,26 +1,5 @@
-body {
-	font-family: "Trebuchet MS", "Helvetica", "Arial",  "Verdana", "sans-serif";
-	font-size: 62.5%;
-    margin: 0.5em;
-    padding: 0.2em;
-    background-color: #1f1f1f;
-}
-
-table {
-    border-spacing: 5px;
-}
-
-thead th {
-    text-align: left;
-}
-
-tr.even td {
-    background-color: yellow;
-    background-color: orange;
-}
-
-table tbody {
-    padding: 5px;
+#content {
+    margin-top: 20px;
 }
 
 .itani, .nation1 {
@@ -40,23 +19,13 @@ table tbody {
 }
 
 #chat_box {
+    height: 370px;
     overflow: auto;
-    height: 500px;
 }
 
-#tab-1, #tab-2, #tab-3, #tab-3-1, #tab-3-2, #tab-4 {
-    padding: 0;
-    margin: 0;
-}
-
-#chat_msg {
-    width: 100%;
-}
-
-#chat_box, #chat_msg {
-    border: 1px solid #000;
-    background-color: #1e1e1e;
-    color: #efefef;
+.tabs {
+    overflow: auto;
+    height: 530px;
 }
 
 #map_systems_img {

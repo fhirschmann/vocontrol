@@ -30,8 +30,6 @@ function health2color(health) {
 }
 
 $(function() {
-    $("#tabs").tabs();
-
     $("#chat_msg").keypress(function(event) {
         var sel = null;
         if ((event.which == 103 && event.ctrlKey)) {
@@ -60,6 +58,9 @@ $(function() {
 
     $("#vo_reload").live("click", vo_reload);
     $("#chat_msg").inputHistory({size: 30});
+    $("#channel-options").click(function() {
+        $(this).toggleClass("active");
+    });
     $("#chat_form").live("keydown", function(e) {
         var keyCode = e.keyCode || e.which;
 
@@ -75,6 +76,10 @@ $(function() {
                     $("#chat_msg").val($("#chat_msg").val().replace(/\w*$/, res));
                 }
             });
+        } else if (keyCode == 13) {
+            event.preventDefault();
+            event.stopPropagation();
+            $("#chat_form").submit();
         }
     });
 
