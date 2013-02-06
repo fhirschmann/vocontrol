@@ -53,7 +53,6 @@ function voutil.table.map(func, tbl)
     return new_tbl
 end
 
-
 --- Inverts a a table. The input table should be bijective.
 -- @param tbl the table to invert
 -- @return an inverted table
@@ -63,6 +62,20 @@ function voutil.table.invert(tbl)
     for k, v in pairs(tbl) do
         tbl2[v] = k
     end
+end
+
+--- Returns a filtered table.
+-- @param tbl a table
+-- @param func a filter function
+function voutil.table.filter(tbl, func)
+    local tbl2 = {}
+    for k, v in pairs(tbl) do
+        if func(k, v) then
+            tbl2[k] = v
+        end
+    end
+
+    return tbl2
 end
 
 return voutil
