@@ -32,9 +32,17 @@ return function(context)
                     <ul class="nav" id="nav-events">
                         <li><a href="#anchor-chat">Chat</a></li>
                         <li><a href="#anchor-sector">Sector</a></li>
-                        <li><a href="#anchor-debug">Debug</a></li>
                     </ul>
                 </div>
+                <ul class="nav pull-right">
+                    <li class="divider-vertical"></li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Tools <b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="#" id="vo_reload">Reload Interface</a></li>
+                        </ul>
+                    </li>
+                </ul>
             </div>
         </div>
     </div>
@@ -87,14 +95,6 @@ return function(context)
                 <tbody>
                 </tbody>
             </table>
-        </div>
-
-        <a id="anchor-debug"></a><br />
-        <h2>Debug</h2>
-        <div id="tab-debug" class="tabs well">
-            <p>
-            <button id="vo_reload">Reload Interface</button>
-            </p>
         </div>
 
     </div>
