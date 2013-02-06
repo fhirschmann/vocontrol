@@ -7,13 +7,18 @@ for k, v in pairs(dofile("urls.lua")) do
     server:add_route(k, v)
 end
 
+RegisterEvent(function(event, data)
+        if server.listening then
+            server:stop()
+        end
+    end, "UNLOAD_INTERFACE")
+
 local function start(port)
     vohttp.DEBUG = gkini.ReadInt("vomote", "debug", 0) == 1
     server:start(port)
 end
 
 local port = gkini.ReadInt("vomote", "port", 9001)
-local autostart = gkini.ReadInt("vomote", "autostart", 0)
 
 -- Command Line Interface
 local VALID_OPTIONS = {"autostart", "debug"}
@@ -53,11 +58,6 @@ local function cli(data, args)
             server:stop()
             start(port)
         elseif args[1] == "reload" then
-            local listening = server.listening
-            if listening then
-                server:stop()
-            end
-
             ReloadInterface()
         elseif args[1] == "set" then
             if voutil.table.contains_value(VALID_OPTIONS, args[2]) then
@@ -102,6 +102,6 @@ end
 
 RegisterUserCommand("vomote", cli)
 
-if autostart == 1 then
+if gkini.ReadInt("vomote", "autostart", 0) == 1 then
     start(port)
 end
