@@ -14,7 +14,7 @@ end
 
 local function serve(req)
     local data = json.decode(req.post_data)
-    local response = vohttp.response.Response:new()
+    local response = vomote.http.response.Response:new()
 
     local f = METHODS[data["method"]:sub(4)]
     local serve = {jsonrpc="2.0", id=req.post_data["id"]}

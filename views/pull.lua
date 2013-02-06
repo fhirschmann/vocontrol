@@ -50,7 +50,7 @@ end
 local function serve(req)
     local last_query = tonumber(req.get_data["last_query"]) or nil
 
-    local r = vohttp.response.Response:new()
+    local r = vomote.http.response.Response:new()
     r.headers["Content-Type"] = "application/json"
     --r.headers["Connection"] = "Keep-Alive"
 

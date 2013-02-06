@@ -1,7 +1,14 @@
 local voutil = dofile("util.lua")
+vomote = {}
+vomote.http = dofile("lib/vohttp_packed.lua")
+
+if gkini.ReadInt("vomote", "dev", 0) == 1 then
+    -- vomote.http needs to be loaded globally in this case
+    vomote.http = vohttp
+end
 
 -- Server setup
-server = vohttp.Server:new()
+server = vomote.http.Server:new()
 
 for k, v in pairs(dofile("urls.lua")) do
     server:add_route(k, v)
@@ -14,7 +21,7 @@ RegisterEvent(function(event, data)
     end, "UNLOAD_INTERFACE")
 
 local function start(port)
-    vohttp.DEBUG = gkini.ReadInt("vomote", "debug", 0) == 1
+    vomote.DEBUG = gkini.ReadInt("vomote", "debug", 0) == 1
     server:start(port)
 end
 

@@ -6,7 +6,7 @@ context["DEBUG"] = gkini.ReadInt("vomote", "debug", 0) == 1
 template_base = dofile("templates/base.html.lua")(context)
 
 local function serve(req)
-    local r = vohttp.response.Response:new()
+    local r = vomote.http.response.Response:new()
     r.body = template_base
     return r
 end
