@@ -2,6 +2,8 @@ local voutil = dofile("util.lua")
 
 local Queue = {}
 
+-- TODO: Don't save volatile information in self._past
+
 --- Creates a new empty queue.
 -- @param max_history the maximum number of queries to keep track of
 -- @return a new queue
@@ -17,11 +19,19 @@ end
 --- Resets this queue.
 function Queue:reset()
     self._change = {}
+    self._volatile = {}
 end
 
 --- Sets the attribute identified by name to value.
 function Queue:set(name, value)
     self._change[name] = value
+end
+
+--- Sets volatile information (such as sector info).
+-- @param name the name of the attribute
+-- @param value the value
+function Queue:set_volatile(name, value)
+    self._volatile[name] = value
 end
 
 --- Appends a value of an attribute identified by name.
@@ -43,6 +53,9 @@ function Queue:construct(last_query)
 
     local copy = voutil.table.deepcopy(self._change)
     copy["timestamp"] = os.time()
+    for k, v in pairs(self._volatile) do
+        copy[k] = v
+    end
 
     if table.getn(self._past) >= self._max_history then
         -- remove the entry and its mapping
