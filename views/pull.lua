@@ -11,10 +11,9 @@ end
 RegisterEvent(target, "TARGET_CHANGED")
 
 --- Get info for a player.
--- @return a tuple (id, name, dist, health, faction_id, faction_name)
+-- @return a tuple (name, dist, health, faction_id, faction_name)
 local function player_info(pid)
     return {
-        pid,
         GetPlayerName(pid),
         math.ceil(GetPlayerDistance(pid) or -1),
         math.ceil(GetPlayerHealth(pid)),
@@ -60,7 +59,12 @@ local function serve(req)
     --r.headers["Connection"] = "Keep-Alive"
 
     local sector = {}
-    ForEachPlayer(function(pid) table.insert(sector, player_info(pid)) end)
+    -- tostring because the json lib is broken
+    ForEachPlayer(function(pid)
+        if GetPlayerName(pid):sub(0, 20) ~= "(reading transponder" then
+            sector[tostring(pid)] = player_info(pid)
+        end
+    end)
     queue:set_volatile("sector", sector)
 
     if not last_query then

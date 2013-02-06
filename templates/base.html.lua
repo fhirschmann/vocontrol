@@ -11,6 +11,7 @@ return function(context)
     <link rel="stylesheet" href="$URL/css/darkstrap.css" />
     <!--<link rel="stylesheet" href="$URL/css/bootstrap-responsive.css" />-->
     <script src="http://code.jquery.com/jquery-1.8.3.js"></script>
+    <script src="$URL/js/underscore.min.js"></script>
     <!--<script src="http://code.jquery.com/ui/1.10.0/jquery-ui.js"></script>-->
     <script src="$URL/js/bootstrap.min.js"></script>
     <script src="$URL/js/jquery.strings.js"></script>
@@ -41,6 +42,7 @@ return function(context)
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">Tools <b class="caret"></b></a>
                         <ul class="dropdown-menu">
                             <li><a href="#" id="vo_reload">Reload Interface</a></li>
+                            <li><a href="#" id="vo-update">Update Now</a></li>
                         </ul>
                     </li>
                 </ul>
@@ -93,7 +95,6 @@ return function(context)
                         <th>Faction</th>
                     </tr>
                 </thead>
-                <tbody>
                 </tbody>
             </table>
         </div>
