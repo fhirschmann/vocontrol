@@ -46,9 +46,6 @@ $(function() {
             sel = "SECTOR";
         }
 
-        if (sel != null) {
-            $("#chat_dest").val(sel);
-        }
     });
     /*
     $("#map_systems").on("click", "area", function(e) {
@@ -58,7 +55,9 @@ $(function() {
 
     $("#vo_reload").live("click", vo_reload);
     $("#chat_msg").inputHistory({size: 30});
-    $("#channel-options").click(function() {
+    $("#channel-options li").on("click", function(event) {
+        $("#channel-options li").removeClass("active");
+        $("#channel-current").text($(this).text());
         $(this).toggleClass("active");
     });
     $("#chat_form").live("keydown", function(e) {
@@ -92,7 +91,8 @@ $(function() {
             if ($("#chat_msg").val().charAt(0) == "/") {
                 vo("processcmd", [$("#chat_msg").val().slice(1)]);
             } else {
-                vo("chat", [$("#chat_msg").val(), $("#chat_dest").val()]);
+                var dest = $("#channel-options").find(".active").text().toUpperCase();
+                vo("chat", [$("#chat_msg").val(), dest]);
             }
             $("#chat_msg").val("");
         }

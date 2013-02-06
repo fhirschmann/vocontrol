@@ -51,11 +51,11 @@ return function(context)
                 <fieldset>
                     <div class="input-append input-prepend">
                         <div class="btn-group dropup" id="channel-dropup">
-                            <button class="btn dropdown-toggle btn-success" data-toggle="dropdown">
+                            <button id="channel-current" class="btn dropdown-toggle btn-inverse" data-toggle="dropdown">
                                 Channel
                             </button>
 
-                            <input class="span6" id="chat_msg" type="text" \>
+                            <input class="input-xxlarge" id="chat_msg" type="text" autocomplete=off \>
 
                             <ul class="dropdown-menu" id="channel-options">
                                 <li><a href="#">Sector</a></li>
@@ -66,7 +66,7 @@ return function(context)
                             </ul>
                         </div>
                         <input type="hidden" id="chat_dest" value="CHANNEL" />
-                        <button class="btn btn-primary" type="submit">Submit</button>
+                        <button class="btn btn-primary" type="submit">Send</button>
                     </div>
                 </fieldset>
             </form>
