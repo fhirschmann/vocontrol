@@ -25,6 +25,10 @@ end
 
 -- Chat Messages
 local function chat(event, data)
+    if not chatinfo[event]["formatstring"] then
+        return
+    end
+
     local add = {
         color="#"..chatinfo[event][1]:sub(2),
         formatstring=chatinfo[event]["formatstring"],
@@ -57,13 +61,15 @@ local function serve(req)
 
     local sector = {}
     ForEachPlayer(function(pid) table.insert(sector, player_info(pid)) end)
-    queue:set("sector", sector)
+    queue:set_volatile("sector", sector)
 
     if not last_query then
-        queue:set("player", player_info(GetCharacterIDByName(GetPlayerName())))
+        queue:set_volatile("player", player_info(GetCharacterIDByName(GetPlayerName())))
     end
 
     r.body = json.encode(queue:construct(last_query))
+    print("----------_")
+    print(r.body)
     queue:reset()
     return r
 end
