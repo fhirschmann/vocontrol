@@ -1,5 +1,7 @@
 .PHONY: all
 
+all: vohttp encapsulate
+
 vohttp:
 	make -C lib/vohttp/
 	cp lib/vohttp/out/vohttp_packed.lua lib/
