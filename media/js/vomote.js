@@ -103,7 +103,13 @@ function update() {
 
                         if ($("#sector-player-" + pid).length != 0) {
                             // Player exists
+                            var last_health = parseInt($("#sector-player-" + pid).
+                                find("td:nth-child(3)").text());
                             $("#sector-player-" + pid).replaceWith(row);
+                            if ((info[2] < last_health - 10) && (info[2] != -1)) {
+                                $("#sector-player-" + pid).effect(
+                                    "highlight", {color: "#5C000C"}, 2000);
+                            }
                         } else {
                             // New player
                             $("#sector tr:last").after(row);

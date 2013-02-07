@@ -9,6 +9,7 @@ return function(context)
     <link rel="stylesheet" href="$URL/css/style.css" />
     <link rel="stylesheet" href="$URL/css/bootstrap.min.css" />
     <link rel="stylesheet" href="$URL/css/darkstrap.css" />
+    <link rel="stylesheet" href="$URL/css/jquery-ui-1.10.0.custom.min.css" />
     <!--<link rel="stylesheet" href="$URL/css/bootstrap-responsive.css" />-->
     <script src="http://code.jquery.com/jquery-1.8.3.js"></script>
     <script src="$URL/js/underscore.min.js"></script>
@@ -17,6 +18,7 @@ return function(context)
     <script src="$URL/js/jquery.strings.js"></script>
     <script src="$URL/js/jquery.jsonrpc.js"></script>
     <script src="$URL/js/jquery.inputHistory.min.js"></script>
+    <script src="$URL/js/jquery-ui-1.10.0.custom.min.js"></script>
     <script src="$URL/js/vomote.js"></script>
 </head>
 <body data-spy="scroll" data-target=".navbar">
