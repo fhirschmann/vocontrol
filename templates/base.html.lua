@@ -60,8 +60,6 @@ return function(context)
 
             <a id="anchor-chat"></a><br />
 
-            <h2>Chat</h2>
-
             <div id="chat_box" class="well"></div>
             <form id="chat_form" class="well">
                 <fieldset>
@@ -91,10 +89,8 @@ return function(context)
 
             <a id="anchor-sector"></a><br />
 
-            <h2>Sector</h2>
-
-            <div class="well">
-                <table id="sector" class="table table-striped">
+            <div class="well" id="sector-table-container">
+                <table id="sector-table" class="table table-striped">
                     <thead>
                         <tr>
                             <th>Name</th>

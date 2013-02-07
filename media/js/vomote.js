@@ -95,6 +95,22 @@ function format_sector_row(pid, info) {
             '</tr>', info);
 }
 
+/**
+ * Adjust the height of the elements according to the window
+ * size.
+ *
+ * I seriously dislike this, so please tell me how to do it in a
+ * better way.
+ */
+function adjust_dimensions() {
+    var height = $(window).height();
+    var width = $(window).width();
+    //$(".tabs").height("400px");
+    $("#sector-table-container").height(height - 130);
+    $("#chat_box").height(height - 223);
+    $(".tabs").height(height - 50);
+}
+
 // Keep track of the last query we received
 var last_query = null;
 
@@ -254,4 +270,9 @@ $(function() {
     }, 2000);
     update();
 
+    /*
+     * Adjust the interface dimensions.
+     */
+    $(window).resize(adjust_dimensions);
+    adjust_dimensions();
 });
