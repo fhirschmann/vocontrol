@@ -101,7 +101,7 @@ local function serve(req)
     r.headers["Content-Type"] = "application/json"
     --r.headers["Connection"] = "Keep-Alive"
 
-    --sector()
+    sector()
 
     if not last_query then
         entered()
