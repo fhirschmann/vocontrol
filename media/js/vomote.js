@@ -66,20 +66,20 @@ function health2color(health) {
  * @return {String} the player representation
  */
 function format_player(p) {
-   return '<font class="nation' + p[3] + '">' +
-       (p[5] ? "[" + p[5] + "] " : "") + p[0] + "</font>";
+    return '<font class="nation' + p[3] + '">' +
+        (p[5] ? "[" + p[5] + "] " : "") + p[0] + "</font>";
 }
 
 
 function format_sector_row(pid, info) {
-  return $.format(
-  '<tr id="sector-player-' + pid + '" class="nation{3}">' +
-  '<td>' + format_player(info) + '</td>' +
-  '<td>' + ((info[1] == '-1') ? '' : '{1}m') + '</td>' +
-  '<td class="' + health2color(info[2]) + '">' +
-      ((info[2] == '-1') ? '' : '{2}') + '</td>' +
-  '<td>{4}</td>' +
-  '</tr>', info);
+    return $.format(
+            '<tr id="sector-player-' + pid + '" class="nation{3}">' +
+            '<td>' + format_player(info) + '</td>' +
+            '<td>' + ((info[1] == '-1') ? '' : '{1}m') + '</td>' +
+            '<td class="' + health2color(info[2]) + '">' +
+            ((info[2] == '-1') ? '' : '{2}') + '</td>' +
+            '<td>{4}</td>' +
+            '</tr>', info);
 }
 
 // Keep track of the last query we received
