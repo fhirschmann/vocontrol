@@ -153,7 +153,7 @@ function update() {
                             });
                         }
                     });
-                    $("#sector").find("tr:gt(0)").each(function() {
+                    $("#sector-table").find("tr:gt(0)").each(function() {
                         // Remove players that left
                         var pid2 = $(this).attr("id").substring(14);
                         if (!_.contains(_.keys(value), pid2)) {
