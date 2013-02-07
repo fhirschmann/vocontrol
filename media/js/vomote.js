@@ -38,7 +38,8 @@ function vo_reload() {
  */
 function vo_target(pid) {
     vo("target", [pid]);
-    //$("#targ_" + pid).effect("highlight", {color: "#424242"}, 1500);
+    $("#sector-player-" + pid).effect(
+        "highlight", {color: "#303030"}, 700);
 }
 
 /**
