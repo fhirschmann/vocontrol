@@ -46,6 +46,12 @@ function cmd.restart()
     cmd.start()
 end
 
+function cmd.ctrl(...)
+    if ... ~= nil then
+        ProcessEvent("VOMOTE_CTRL", {...})
+    end
+end
+
 cmd.reload = ReloadInterface
 
 cmd.set.url = voutil.func.partial(gkini.WriteString, "vomote", "url")
@@ -76,7 +82,6 @@ local function dispatch(root, args)
         dispatch(root[a], args)
     else
         if type(root) == "table" then
-            print(root)
             print("vomote: incomplete command.")
         else
             root(unpack(args))

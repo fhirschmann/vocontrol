@@ -97,6 +97,19 @@ function format_sector_row(pid, info) {
 }
 
 /**
+ * Executes commands sent by the player in VO.
+ */
+function exec_cmd(data) {
+    _.each(data, function(d) {
+        switch (d[0]) {
+            case "tab":
+                activate_tab(d[1]);
+                break;
+        }
+    });
+}
+
+/**
  * Adjust the height of the elements according to the window
  * size.
  *
@@ -187,6 +200,8 @@ function update() {
                 } else if (key == "player") {
                     $("#player-name").addClass("nation" + data[key][4]);
                     $("#player-name").html(format_player(data[key]));
+                } else if (key == "cmd") {
+                    exec_cmd(data[key]);
                 }
             });
         });
