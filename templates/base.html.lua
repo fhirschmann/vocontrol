@@ -10,7 +10,7 @@ return function(context)
     <link rel="stylesheet" href="$URL/css/bootstrap.min.css" />
     <link rel="stylesheet" href="$URL/css/darkstrap.css" />
     <link rel="stylesheet" href="$URL/css/jquery-ui-1.10.0.custom.min.css" />
-    <!--<link rel="stylesheet" href="$URL/css/bootstrap-responsive.css" />-->
+    <link rel="stylesheet" href="$URL/css/bootstrap-responsive.css" />
     <script src="http://code.jquery.com/jquery-1.8.3.js"></script>
     <script src="$URL/js/underscore.min.js"></script>
     <!--<script src="http://code.jquery.com/ui/1.10.0/jquery-ui.js"></script>-->
@@ -36,18 +36,18 @@ return function(context)
                         <li><a href="#anchor-chat" id="nav-event-chat" class="nav-event-item">Chat</a></li>
                         <li><a href="#anchor-sector" id="nav-event-sector" class="nav-event-item">Sector</a></li>
                     </ul>
+                    <ul class="nav pull-right">
+                        <li><a><span id="player-name" style="display:inline"></span></a></li>
+                        <li class="divider-vertical"></li>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Tools <b class="caret"></b></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="#" id="vo_reload">Reload Interface</a></li>
+                                <li><a href="#" id="vo-update">Update Now</a></li>
+                            </ul>
+                        </li>
+                    </ul>
                 </div>
-                <ul class="nav pull-right">
-                    <li><a><span id="player-name" style="display:inline"></span></a></li>
-                    <li class="divider-vertical"></li>
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Tools <b class="caret"></b></a>
-                        <ul class="dropdown-menu">
-                            <li><a href="#" id="vo_reload">Reload Interface</a></li>
-                            <li><a href="#" id="vo-update">Update Now</a></li>
-                        </ul>
-                    </li>
-                </ul>
             </div>
         </div>
     </div>

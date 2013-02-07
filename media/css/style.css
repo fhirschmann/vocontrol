@@ -1,5 +1,5 @@
 #content {
-    margin-top: 20px;
+    margin-top: 30px;
 }
 
 .itani, .nation1 {
@@ -25,7 +25,6 @@
 
 .tabs {
     overflow: auto;
-    height: 530px;
 }
 
 #map_systems_img {
