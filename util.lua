@@ -9,6 +9,7 @@
 
 local voutil = {}
 voutil.table = {}
+voutil.func = {}
 
 --- Checks wheter a table contains a value
 -- @param tbl the table to check
@@ -77,5 +78,22 @@ function voutil.table.filter(tbl, func)
 
     return tbl2
 end
+
+--- Returns a new partial object which when called will behave like
+--- func called with the positional arguments ....
+function voutil.func.partial(func, ...)
+    local a = {...}
+    return function(...)
+        local args = {}
+        for _, arg in pairs(a) do
+            table.insert(args, arg)
+        end
+        for _, arg in pairs({...}) do
+            table.insert(args, arg)
+        end
+        return func(unpack(args))
+    end
+end
+
 
 return voutil
