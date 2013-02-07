@@ -84,12 +84,12 @@ end
 --- Splits a string into an array.
 -- @param string the string to split
 -- @param sep the separator
-function voutil.string.split(string, sep)
+function voutil.string.split(str, sep)
         local sep = sep or ","
         local fields = {}
 
         local pattern = string.format("([^%s]+)", sep)
-        string:gsub(pattern, function(c)
+        str:gsub(pattern, function(c)
             table.insert(fields, c)
         end)
         return fields
