@@ -47,6 +47,12 @@ local function chat(event, data)
     queue:append("chat", add)
 end
 
+-- Entered game
+local function entered(event, data)
+    queue:set("player", player_info(GetCharacterIDByName(GetPlayerName())))
+end
+RegisterEvent(entered, "ENTERED_STATION")
+
 -- Print Messages
 local print_orig = print
 function print(...)
@@ -77,7 +83,7 @@ local function serve(req)
     queue:set_volatile("sector", sector)
 
     if not last_query then
-        queue:set_volatile("player", player_info(GetCharacterIDByName(GetPlayerName())))
+        entered()
     end
 
     r.body = json.encode(queue:construct(last_query))
