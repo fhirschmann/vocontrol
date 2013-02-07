@@ -161,7 +161,7 @@ function update() {
                             $("#sector-table tr:last").after(row);
                             $("#sector-player-" + pid).hide();
                             $("#sector-player-" + pid).fadeIn(fade_delay);
-                            $("#sector-player-" + pid).live("click", function() {
+                            $("#sector-player-" + pid).on("click", function() {
                                 vo_target(parseInt(pid));
                             });
                         }
@@ -233,7 +233,7 @@ $(function() {
     });
 
     // Handle keypresses in the text input
-    $("#chat_form").live("keydown", function(e) {
+    $("#chat_form").on("keydown", function(e) {
         var keyCode = e.keyCode || e.which;
 
         if (keyCode == 9) { // TAB
@@ -278,8 +278,8 @@ $(function() {
     /*
      * Miscellaneous effects.
      */
-    $("#vo_reload").live("click", vo_reload);
-    $("#vo-update").live("click", update);
+    $("#vo_reload").on("click", vo_reload);
+    $("#vo-update").on("click", update);
 
     /*
      * Start the update loop.

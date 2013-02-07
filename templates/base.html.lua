@@ -12,7 +12,7 @@ return function(context)
     <link rel="stylesheet" href="$URL/css/bootstrap-responsive.css" />
     <link rel="stylesheet" href="$URL/css/style.css" />
     <link rel="stylesheet" href="$URL/css/jquery-ui-1.10.0.custom.min.css" />
-    <script src="http://code.jquery.com/jquery-1.8.3.js"></script>
+    <script src="$URL/js/jquery-1.9.1.min.js"></script>
     <script src="$URL/js/underscore.min.js"></script>
     <!--<script src="http://code.jquery.com/ui/1.10.0/jquery-ui.js"></script>-->
     <script src="$URL/js/bootstrap.min.js"></script>
