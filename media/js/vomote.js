@@ -141,7 +141,7 @@ function update() {
                             }
                         } else {
                             // New player
-                            $("#sector tr:last").after(row);
+                            $("#sector-table tr:last").after(row);
                             $("#sector-player-" + pid).hide();
                             $("#sector-player-" + pid).fadeIn(fade_delay);
                             $("#sector-player-" + pid).live("click", function() {
