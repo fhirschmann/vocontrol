@@ -50,7 +50,7 @@ cmd.reload = ReloadInterface
 
 cmd.set.url = voutil.func.partial(gkini.WriteString, "vomote", "url")
 
-for _, opt in pairs({"autostart", "interval", "port"}) do
+for _, opt in pairs({"autostart", "interval", "port", "evqueuesize"}) do
     cmd.set[opt] = voutil.func.partial(gkini.WriteString, "vomote")
 end
 
@@ -64,7 +64,7 @@ where:
     stop - stop vomote
     restart - restart vomote
     reload - reload interface
-    set {url,autostart,interval,port} - set various options]])
+    set {url,autostart,interval,port,evqueuesize} - set various options]])
 end
 
 --- Dispatches function calls in a DFS-manner

@@ -9,7 +9,7 @@ function Queue:new(max_history)
     self:reset()
     self._past = {}
     self._time2past = {}
-    self._max_history = max_history or 100
+    self._max_history = max_history or gkini.ReadInt("vomote", "evqueuesize", 100)
 
     return self
 end
