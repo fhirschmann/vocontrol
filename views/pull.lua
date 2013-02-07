@@ -51,7 +51,9 @@ end
 local print_orig = print
 function print(...)
     print_orig(...)
-    queue:append("chat", {formatstring="<msg>", color="#28b4f0", msg=...})
+    for _, line in ipairs(vomote.util.string.split(..., "\n")) do
+        queue:append("chat", {formatstring="<msg>", color="#28b4f0", msg=line})
+    end
 end
 
 for k, _ in pairs(chatinfo) do

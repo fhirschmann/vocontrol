@@ -9,6 +9,7 @@
 
 local voutil = {}
 voutil.table = {}
+voutil.string = {}
 voutil.func = {}
 
 --- Checks wheter a table contains a value
@@ -77,6 +78,21 @@ function voutil.table.filter(tbl, func)
     end
 
     return tbl2
+end
+
+
+--- Splits a string into an array.
+-- @param string the string to split
+-- @param sep the separator
+function voutil.string.split(string, sep)
+        local sep = sep or ","
+        local fields = {}
+
+        local pattern = string.format("([^%s]+)", sep)
+        string:gsub(pattern, function(c)
+            table.insert(fields, c)
+        end)
+        return fields
 end
 
 --- Returns a new partial object which when called will behave like
