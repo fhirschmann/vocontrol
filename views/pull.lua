@@ -47,6 +47,13 @@ local function chat(event, data)
     queue:append("chat", add)
 end
 
+-- Print Messages
+local print_orig = print
+function print(...)
+    print_orig(...)
+    queue:append("chat", {formatstring="<msg>", color="#28b4f0", msg=...})
+end
+
 for k, _ in pairs(chatinfo) do
     RegisterEvent(chat, k)
 end
@@ -72,6 +79,7 @@ local function serve(req)
     end
 
     r.body = json.encode(queue:construct(last_query))
+    print(r.body)
     queue:reset()
     return r
 end
