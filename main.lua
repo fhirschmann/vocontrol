@@ -1,5 +1,6 @@
 local voutil = dofile("util.lua")
 vomote = {}
+vomote.VERSION = "experimental"
 vomote.http = dofile("lib/vohttp_packed.lua")
 
 if gkini.ReadInt("vomote", "dev", 0) == 1 then

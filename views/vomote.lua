@@ -1,5 +1,6 @@
 context = {}
-context["URL"] = gkini.ReadString("vomote", "url", "http://vomote.0x0b.de/media")
+context["URL"] = gkini.ReadString("vomote", "url",
+                                  "http://vomote.0x0b.de/media" + "/" + vomote.VERSION)
 context["DEBUG"] = gkini.ReadInt("vomote", "debug", 0) == 1
 
 
