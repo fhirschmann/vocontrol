@@ -107,9 +107,12 @@ function adjust_dimensions() {
     var height = $(window).height();
     var width = $(window).width();
     //$(".tabs").height("400px");
-    $("#sector-table-container").height(height - 130);
-    $("#chat_box").height(height - 223);
-    $(".tabs").height(height - 50);
+    //$("#sector-table-container").height(height - 130);
+    //$("#sector-table-container").css("min-height", $("#tab-chat").height());
+    $("#chat_box").height(height - 250);
+    //$(".tabs").height(height - 130);
+    //$(".content").height(height - 250);
+    //$(".tabs").css("overflow", "auto");
 }
 
 // Keep track of the last query we received

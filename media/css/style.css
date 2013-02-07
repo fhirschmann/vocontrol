@@ -1,5 +1,5 @@
 #content {
-    margin-top: 30px;
+    margin-top: 45px;
 }
 
 .itani, .nation1 {
@@ -20,10 +20,18 @@
 
 #chat_box {
     overflow: auto;
+    margin-bottom: 6px;
+}
+
+#chat_form {
+    margin: 0;
+}
+
+#chat_msg {
+    margin-bottom: 0px;
 }
 
 .tabs {
-    overflow: auto;
 }
 
 #map_systems_img {

@@ -4,13 +4,14 @@ return function(context)
 <!doctype html>
 <html>
 <head>
-    <meta charset="utf-8" />
     <title>vomote</title>
-    <link rel="stylesheet" href="$URL/css/style.css" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="$URL/css/bootstrap.min.css" />
     <link rel="stylesheet" href="$URL/css/darkstrap.css" />
-    <link rel="stylesheet" href="$URL/css/jquery-ui-1.10.0.custom.min.css" />
     <link rel="stylesheet" href="$URL/css/bootstrap-responsive.css" />
+    <link rel="stylesheet" href="$URL/css/style.css" />
+    <link rel="stylesheet" href="$URL/css/jquery-ui-1.10.0.custom.min.css" />
     <script src="http://code.jquery.com/jquery-1.8.3.js"></script>
     <script src="$URL/js/underscore.min.js"></script>
     <!--<script src="http://code.jquery.com/ui/1.10.0/jquery-ui.js"></script>-->
@@ -54,11 +55,11 @@ return function(context)
 
     <a id="anchor-top"></a>
 
-    <div class="container" id="content">
+    <div class="container well" id="content">
 
+        <a id="anchor-chat"></a>
         <div id="tab-chat" class="tabs">
 
-            <a id="anchor-chat"></a><br />
 
             <div id="chat_box" class="well"></div>
             <form id="chat_form" class="well">
@@ -87,9 +88,9 @@ return function(context)
 
         <div id="tab-sector" class="tabs">
 
-            <a id="anchor-sector"></a><br />
+            <a id="anchor-sector"></a>
 
-            <div class="well" id="sector-table-container">
+            <div id="sector-table-container">
                 <table id="sector-table" class="table table-striped">
                     <thead>
                         <tr>
