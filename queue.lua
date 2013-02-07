@@ -1,5 +1,3 @@
-local voutil = dofile("util.lua")
-
 local Queue = {}
 
 -- TODO: Don't save volatile information in self._past
@@ -51,7 +49,7 @@ function Queue:construct(last_query)
         return self._past[last_query]
     end
 
-    local copy = voutil.table.deepcopy(self._change)
+    local copy = vomote.util.table.deepcopy(self._change)
     copy["timestamp"] = os.time()
     for k, v in pairs(self._volatile) do
         copy[k] = v
@@ -63,7 +61,7 @@ function Queue:construct(last_query)
         self._time2past[q["timestamp"]] = nil
 
         -- shift the table indices down by 1
-        self._time2past = voutil.table.map(function(x) return x - 1 end, self._time2past)
+        self._time2past = vomote.util.table.map(function(x) return x - 1 end, self._time2past)
     end
 
     table.insert(self._past, copy)
