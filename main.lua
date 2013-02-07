@@ -48,7 +48,7 @@ end
 
 cmd.reload = ReloadInterface
 
-cmd.set.url = voutil.func.partial(writeString, "url")
+cmd.set.url = voutil.func.partial(gkini.WriteString, "vomote", "url")
 
 for _, opt in pairs({"autostart", "interval", "port"}) do
     cmd.set[opt] = voutil.func.partial(gkini.WriteString, "vomote")
