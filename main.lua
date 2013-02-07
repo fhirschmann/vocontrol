@@ -64,12 +64,11 @@ end
 
 function cmd.help()
     print([[usage: vomote {start,stop,restart,reload,set,help} ...
-
-where:
     start - start vomote
     stop - stop vomote
     restart - restart vomote
     reload - reload interface
+    ctrl {tab {chat,sector}}
     set {url,autostart,interval,port,evqueuesize} - set various options]])
 end
 
