@@ -78,7 +78,6 @@ return function(context)
                                 <li><a href="#">System</a></li>
                             </ul>
                         </div>
-                        <input type="hidden" id="chat_dest" value="CHANNEL" />
                         <button class="btn btn-primary" type="submit">Send</button>
                     </div>
                 </fieldset>
