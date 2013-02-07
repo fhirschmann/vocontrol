@@ -49,18 +49,46 @@ end
 
 -- Entered game
 local function entered(event, data)
-    queue:set("player", player_info(GetCharacterIDByName(GetPlayerName())))
+    local name = GetPlayerName()
+    if name then
+        queue:set("player", player_info(GetCharacterIDByName(name)))
+    end
 end
 RegisterEvent(entered, "ENTERED_STATION")
 
+-- Players in the current sector
+local function sector()
+    local sector = {}
+    -- tostring because the json lib is broken
+    ForEachPlayer(function(pid)
+        if GetPlayerName(pid):sub(0, 20) ~= "(reading transponder" then
+            sector[tostring(pid)] = player_info(pid)
+        end
+    end)
+    queue:set_volatile("sector", sector)
+end
+
+--[[
 -- Print Messages
 local print_orig = print
 function print(...)
     print_orig(...)
+    if not ... then
+        return
+    end
+
     for _, line in ipairs(vomote.util.string.split(..., "\n")) do
         queue:append("chat", {formatstring="<msg>", color="#28b4f0", msg=line})
     end
 end
+safe_print = print
+--]]
+
+-- Commands for the client
+local function clientcmd(event, data)
+    queue:append("cmd", data)
+end
+RegisterEvent(clientcmd, "VOMOTE_CTRL")
 
 for k, _ in pairs(chatinfo) do
     RegisterEvent(chat, k)
@@ -73,14 +101,7 @@ local function serve(req)
     r.headers["Content-Type"] = "application/json"
     --r.headers["Connection"] = "Keep-Alive"
 
-    local sector = {}
-    -- tostring because the json lib is broken
-    ForEachPlayer(function(pid)
-        if GetPlayerName(pid):sub(0, 20) ~= "(reading transponder" then
-            sector[tostring(pid)] = player_info(pid)
-        end
-    end)
-    queue:set_volatile("sector", sector)
+    --sector()
 
     if not last_query then
         entered()
