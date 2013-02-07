@@ -1,0 +1,3 @@
+[submodule "lib/vohttp"]
+	path = lib/vohttp
+	url = git://github.com/fhirschmann/vohttp.git
