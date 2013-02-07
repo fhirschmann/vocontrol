@@ -33,8 +33,8 @@ return function(context)
                 <a class="brand" href="#top">vomote</a>
                 <div class="nav-collapse collapse">
                     <ul class="nav" id="nav-events">
-                        <li><a href="#anchor-chat">Chat</a></li>
-                        <li><a href="#anchor-sector">Sector</a></li>
+                        <li><a href="#anchor-chat" id="nav-event-chat" class="nav-event-item">Chat</a></li>
+                        <li><a href="#anchor-sector" id="nav-event-sector" class="nav-event-item">Sector</a></li>
                     </ul>
                 </div>
                 <ul class="nav pull-right">
@@ -56,9 +56,12 @@ return function(context)
 
     <div class="container" id="content">
 
-        <a id="anchor-chat"></a><br />
-        <h2>Chat</h2>
         <div id="tab-chat" class="tabs">
+
+            <a id="anchor-chat"></a><br />
+
+            <h2>Chat</h2>
+
             <div id="chat_box" class="well"></div>
             <form id="chat_form" class="well">
                 <fieldset>
@@ -84,22 +87,26 @@ return function(context)
             </form>
         </div>
 
-        <a id="anchor-sector"></a><br />
-        <h2>Sector</h2>
-        <div id="tab-sector" class="tabs well">
-            <table id="sector" class="table table-striped">
-                <thead>
-                    <tr>
-                        <th>Name</th>
-                        <th>Distance</th>
-                        <th>Health</th>
-                        <th>Faction</th>
-                    </tr>
-                </thead>
-                </tbody>
-            </table>
-        </div>
+        <div id="tab-sector" class="tabs">
 
+            <a id="anchor-sector"></a><br />
+
+            <h2>Sector</h2>
+
+            <div class="well">
+                <table id="sector" class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Distance</th>
+                            <th>Health</th>
+                            <th>Faction</th>
+                        </tr>
+                    </thead>
+                    </tbody>
+                </table>
+            </div>
+       </div>
     </div>
 </body>
 </html>

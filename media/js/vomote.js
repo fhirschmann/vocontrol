@@ -60,6 +60,19 @@ function health2color(health) {
 }
 
 /**
+ * Activates the given tab
+ *
+ * @param tab the tab to activate.
+ */
+function activate_tab(tab) {
+    $(".tabs").hide();
+    $("#tab-" + tab).show();
+
+    $(".nav-event-item").parent().removeClass("active");
+    $("#nav-event-" + tab).parent().addClass("active");
+}
+
+/**
  * Formats a player using the array returned by the server.
  *
  * @param {Array} array with player information
@@ -161,9 +174,14 @@ function update() {
 }
 
 $(function() {
-    /*
-     * Dropdown buttons.
+    /**
+     * Tab Navigation.
      */
+    $(".nav-event-item").click(function() {
+        //alert($(this).attr("href"));
+        activate_tab($(this).attr("id").substring(10));
+    });
+    activate_tab("sector");
 
     /*
      * Chat section starts.
