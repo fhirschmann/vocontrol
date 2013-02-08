@@ -161,9 +161,6 @@ function update() {
                             $("#sector-table tr:last").after(row);
                             $("#sector-player-" + pid).hide();
                             $("#sector-player-" + pid).fadeIn(fade_delay);
-                            $("#sector-player-" + pid).on("click", function() {
-                                vo_target(parseInt(pid));
-                            });
                         }
                     });
                     $("#sector-table").find("tr:gt(0)").each(function() {
@@ -217,6 +214,13 @@ $(function() {
         activate_tab($(this).attr("id").substring(10));
     });
     activate_tab("sector");
+
+    /*
+     * Sector section starts.
+     */
+    $("#sector-table").on("click", "tr", function(event) {
+        vo_target(parseInt($(this).attr("id").substring(14)));
+    });
 
     /*
      * Chat section starts.
