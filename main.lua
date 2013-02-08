@@ -29,6 +29,7 @@ local port = gkini.ReadInt("vomote", "port", 9001)
 -- CLI
 local cmd = {}
 cmd.set = {}
+cmd.reset = {}
 
 function cmd.start()
     vomote.DEBUG = gkini.ReadInt("vomote", "debug", 0) == 1
@@ -55,6 +56,7 @@ end
 cmd.reload = ReloadInterface
 
 cmd.set.url = voutil.func.partial(gkini.WriteString, "vomote", "url")
+cmd.reset.url = function() gkini.WriteString("vomote", "url", "") end
 
 for _, opt in pairs({"autostart", "interval", "port", "evqueuesize"}) do
     cmd.set[opt] = voutil.func.partial(gkini.WriteString, "vomote")
