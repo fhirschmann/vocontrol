@@ -12,7 +12,7 @@ voutil.table = {}
 voutil.string = {}
 voutil.func = {}
 
---- Checks wheter a table contains a value
+--- Checks wheter a table contains a value.
 -- @param tbl the table to check
 -- @param value the value to check for
 -- @return true if `tbl` contains `value`
@@ -26,7 +26,7 @@ function voutil.table.contains_value(tbl, value)
     return false
 end
 
---- Copies a table.
+--- Copies a table deeply.
 -- @param orig the original table to copy
 -- @return a copy of the original table
 function voutil.table.deepcopy(orig)
@@ -44,7 +44,7 @@ function voutil.table.deepcopy(orig)
     return copy
 end
 
---- Maps a function to the values of a table; preserves keys
+--- Maps a function to the values of a table; preserves keys.
 -- @param func the function to apply
 -- @param tbl the table to apply func to
 function voutil.table.map(func, tbl)
@@ -69,6 +69,8 @@ end
 --- Returns a filtered table.
 -- @param tbl a table
 -- @param func a filter function
+-- @return a new table contains all elements of tbl
+--         for which func is true
 function voutil.table.filter(tbl, func)
     local tbl2 = {}
     for k, v in pairs(tbl) do
@@ -80,6 +82,80 @@ function voutil.table.filter(tbl, func)
     return tbl2
 end
 
+--- Returns the first element in a table.
+-- @param tbl the table
+-- @return first element in table
+function voutil.table.head(tbl)
+    for k, v in pairs(tbl) do
+        return v
+    end
+end
+
+--- Returns true if all elements of the table are true.
+-- @param tbl the table
+-- @return true if any of the table's value is true
+function voutil.table.all(tbl)
+    for _, v in pairs(tbl) do
+        if not v then
+            return false
+        end
+
+        return true
+    end
+end
+
+--- Returns true if any of the table's values is true
+-- @param tbl the table
+-- @return true if any of the table's value is true
+function voutil.table.any(tbl)
+    for _, v in pairs(tbl) do
+        if v then
+            return true
+        end
+
+        return false
+    end
+end
+
+--- Returns a new new table containing the union of both tables' values.
+-- @param tbl1 the first table
+-- @param tbl2 the second table
+-- @return a table with all values of tbl1 and tbl2
+function voutil.table.union(tbl1, tbl2)
+    local tbl = {}
+
+    for _, v in ipairs(tbl1) do
+        tbl.insert(tbl, v)
+    end
+
+    for _, v in ipairs(tbl2) do
+        tbl.insert(tbl, v)
+    end
+
+    return tbl
+end
+
+--- Returns a table containing all key/value pairs.
+-- @param tbl1 the first table
+-- @param tbl2 the second table
+-- @return a new table containing all key/value pairs
+function voutil.table.merge(tbl1, tbl2)
+    local tbl = {}
+
+    for k, v in pairs(tbl1) do
+        print(k)
+        tbl[k] = v
+    end
+
+    for k, v in pairs(tbl2) do
+        tbl[k] = v
+    end
+
+    return tbl
+end
+
+--- Returns the union of two tables.
+-- @param tbl
 
 --- Splits a string into an array.
 -- @param string the string to split
@@ -95,7 +171,7 @@ function voutil.string.split(str, sep)
         return fields
 end
 
---- Returns a new partial object which when called will behave like
+--- Returns a new partial object which when called will behave like.
 --- func called with the positional arguments ....
 function voutil.func.partial(func, ...)
     local a = {...}

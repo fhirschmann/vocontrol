@@ -2,6 +2,7 @@ local json = dofile("lib/json.lua")
 local Queue = dofile("queue.lua")
 
 local queue = Queue:new()
+local queue_volatile = Queue:new(3)
 
 
 -- Target change
@@ -65,7 +66,7 @@ local function sector()
             sector[tostring(pid)] = player_info(pid)
         end
     end)
-    queue:set_volatile("sector", sector)
+    queue_volatile:set("sector", sector)
 end
 
 --[[
@@ -107,7 +108,11 @@ local function serve(req)
         entered()
     end
 
-    r.body = json.encode(queue:construct(last_query))
+    local change = vomote.util.table.merge(queue:construct(),
+                        queue_volatile:construct())
+
+    r.body = json.encode(change)
+
     queue:reset()
     return r
 end
