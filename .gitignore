@@ -1,2 +1,3 @@
 *.css.lua
 *.js.lua
+lib/vohttp_packed.lua
