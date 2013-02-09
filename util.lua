@@ -153,9 +153,6 @@ function voutil.table.merge(tbl1, tbl2)
     return tbl
 end
 
---- Returns the union of two tables.
--- @param tbl
-
 --- Splits a string into an array.
 -- @param string the string to split
 -- @param sep the separator
