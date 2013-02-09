@@ -90,6 +90,7 @@ function format_sector_row(pid, info) {
             '<tr id="sector-player-' + pid + '" class="nation{3}">' +
             '<td>' + format_player(info) + '</td>' +
             '<td>' + ((info[1] == '-1') ? '' : '{1}m') + '</td>' +
+            '<td>{6}</td>' + 
             '<td class="' + health2color(info[2]) + '">' +
             ((info[2] == '-1') ? '' : '{2}') + '</td>' +
             '<td>{4}</td>' +

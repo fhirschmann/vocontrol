@@ -20,7 +20,9 @@ local function player_info(pid)
         math.ceil(GetPlayerHealth(pid)),
         GetPlayerFaction(pid),
         FactionName[GetPlayerFaction(pid)],
-        GetGuildTag(pid)}
+        GetGuildTag(pid),
+        GetPrimaryShipNameOfPlayer(pid),
+    }
 end
 
 -- Chat Messages

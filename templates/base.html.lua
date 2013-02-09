@@ -96,6 +96,7 @@ return function(context)
                         <tr>
                             <th>Name</th>
                             <th>Distance</th>
+                            <th>Ship</th>
                             <th>Health</th>
                             <th>Faction</th>
                         </tr>
