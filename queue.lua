@@ -4,12 +4,16 @@ local Queue = {}
 -- @param max_history the maximum number of queries to keep track of
 -- @return a new queue
 function Queue:new(max_history)
-    self:reset()
-    self._past = {}
-    self._time2past = {}
-    self._max_history = max_history or gkini.ReadInt("vomote", "evqueuesize", 100)
+    local new = {}
+    for k, v in pairs(Queue) do
+        new[k] = v
+    end
+    new:reset()
+    new._past = {}
+    new._time2past = {}
+    new._max_history = max_history or gkini.ReadInt("vomote", "evqueuesize", 100)
 
-    return self
+    return new
 end
 
 --- Resets this queue.

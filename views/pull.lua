@@ -108,10 +108,10 @@ local function serve(req)
         entered()
     end
 
-    local change = vomote.util.table.merge(queue:construct(),
-                        queue_volatile:construct())
+    local q1 = queue:construct(last_query)
+    local q2 = queue_volatile:construct(last_query)
 
-    r.body = json.encode(change)
+    r.body = json.encode(vomote.util.table.union(q1, q2))
 
     queue:reset()
     return r
