@@ -125,11 +125,11 @@ function voutil.table.union(tbl1, tbl2)
     local tbl = {}
 
     for _, v in ipairs(tbl1) do
-        tbl.insert(tbl, v)
+        table.insert(tbl, v)
     end
 
     for _, v in ipairs(tbl2) do
-        tbl.insert(tbl, v)
+        table.insert(tbl, v)
     end
 
     return tbl
@@ -143,7 +143,6 @@ function voutil.table.merge(tbl1, tbl2)
     local tbl = {}
 
     for k, v in pairs(tbl1) do
-        print(k)
         tbl[k] = v
     end
 
