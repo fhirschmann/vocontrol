@@ -1,13 +1,22 @@
-local json = dofile("lib/json.lua")
-local Queue = dofile("queue.lua")
+---------------
+-- ## This view exposes /pull/ which handles pull requests by the browser.
+--
+-- [Github Page](https://github.com/fhirschmann/vomote)
+--
+-- @author Fabian Hirschmann <fabian@hirschm.net>
+-- @copyright 2013
+-- @license MIT/X11
 
-local queue = Queue:new()
-local queue_volatile = Queue:new(3)
+local json = dofile("lib/json.lua")
+local Log = dofile("log.lua")
+
+local log = Log:new()
+local log_volatile = Log:new(3)
 
 
 -- Target change
 local function target(event, data)
-    queue:set("target", GetTargetInfo())
+    log:set("target", GetTargetInfo())
 end
 RegisterEvent(target, "TARGET_CHANGED")
 
@@ -48,14 +57,14 @@ local function chat(event, data)
     if data["color"] then
         add["color"] = data["color"]:sub(2)
     end
-    queue:append("chat", add)
+    log:append("chat", add)
 end
 
 -- Entered game
 local function entered(event, data)
     local name = GetPlayerName()
     if name then
-        queue:set("player", player_info(GetCharacterIDByName(name)))
+        log:set("player", player_info(GetCharacterIDByName(name)))
     end
 end
 RegisterEvent(entered, "ENTERED_STATION")
@@ -69,28 +78,12 @@ local function sector()
             sector[tostring(pid)] = player_info(pid)
         end
     end)
-    queue_volatile:set("sector", sector)
+    log_volatile:set("sector", sector)
 end
-
---[[
--- Print Messages
-local print_orig = print
-function print(...)
-    print_orig(...)
-    if not ... then
-        return
-    end
-
-    for _, line in ipairs(vomote.util.string.split(..., "\n")) do
-        queue:append("chat", {formatstring="<msg>", color="#28b4f0", msg=line})
-    end
-end
-safe_print = print
---]]
 
 -- Commands for the client
 local function clientcmd(event, data)
-    queue:append("cmd", data)
+    log:append("cmd", data)
 end
 RegisterEvent(clientcmd, "VOMOTE_CTRL")
 
@@ -111,12 +104,12 @@ local function serve(req)
         entered()
     end
 
-    local q1 = queue:construct(last_query)
-    local q2 = queue_volatile:construct(last_query)
+    local q1 = log:construct(last_query)
+    local q2 = log_volatile:construct(last_query)
 
     r.body = json.encode(vomote.util.table.union(q1, q2))
 
-    queue:reset()
+    log:reset()
     return r
 end
 

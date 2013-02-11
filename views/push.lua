@@ -1,3 +1,12 @@
+---------------
+-- ## This view exposes /push/ which handles commands sent by the browser.
+--
+-- [Github Page](https://github.com/fhirschmann/vomote)
+--
+-- @author Fabian Hirschmann <fabian@hirschm.net>
+-- @copyright 2013
+-- @license MIT/X11
+
 local json = dofile("lib/json.lua")
 
 local METHODS = {

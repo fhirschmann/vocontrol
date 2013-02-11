@@ -1,5 +1,5 @@
 ---------------
--- ## Utilities for LUA
+-- ## Utilities for Vendetta Online's LUA subset.
 --
 -- [Github Page](https://github.com/fhirschmann/vomote)
 --
@@ -7,10 +7,7 @@
 -- @copyright 2013
 -- @license MIT/X11
 
-local voutil = {}
-voutil.table = {}
-voutil.string = {}
-voutil.func = {}
+local voutil = {table={}, string={}, func={}}
 
 --- Checks wheter a table contains a value.
 -- @param tbl the table to check

@@ -1,9 +1,17 @@
+---------------
+-- ## URL mappings.
+--
+-- [Github Page](https://github.com/fhirschmann/vomote)
+--
+-- @author Fabian Hirschmann <fabian@hirschm.net>
+-- @copyright 2013
+-- @license MIT/X11
+
 urls = {}
 
 urls["/"] = dofile("views/vomote.lua")
 urls["/pull/"] = dofile("views/pull.lua")
 urls["/push/"] = dofile("views/push.lua")
-
 
 local css = {
     "bootstrap.min.css",
@@ -24,14 +32,11 @@ local js = {
     "vomote.js",
 }
 
-
 for _, f in ipairs(js) do
     urls["/media/js/"..f] = vomote.http.dispatch.StaticFile:new("media/js/"..f..".lua")
 end
 for _, f in ipairs(css) do
     urls["/media/css/"..f] = vomote.http.dispatch.StaticFile:new("media/css/"..f..".lua")
 end
-
-
 
 return urls
