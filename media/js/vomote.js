@@ -63,7 +63,7 @@ function health2color(health) {
 /**
  * Activates the given tab
  *
- * @param tab the tab to activate.
+ * @param {String} tab the tab to activate.
  */
 function activate_tab(tab) {
     $(".tabs").hide();
@@ -85,7 +85,14 @@ function format_player(p) {
 }
 
 
-function format_sector_row(pid, info) {
+/**
+ * Formats a sector row for a given player.
+ *
+ * @param {Number} pid the player id
+ * @param {Array} info the player info sent by the server
+ * @return {String} an html table entry (td)
+ */
+function sector_format_row(pid, info) {
     return $.format(
             '<tr id="sector-player-' + pid + '" class="nation{3}">' +
             '<td>' + format_player(info) + '</td>' +
@@ -96,11 +103,86 @@ function format_sector_row(pid, info) {
             '</tr>', info);
 }
 
-/** Whether or not to show bots in the sector list. */
+/**
+ * Adds or updates an existing player in the sector table.
+ *
+ * @param {Number} pid the player id
+ * @param {Array} info the player info sent by the server
+ * @return {String} an html table entry (td)
+ */
+function sector_add_or_update(pid, info) {
+    var row = sector_format_row(pid, info);
+
+    if ($("#sector-player-" + pid).length != 0) {
+        // Player exists
+        var last_health = parseInt($("#sector-player-" + pid).
+            find("td:nth-child(3)").text());
+        $("#sector-player-" + pid).replaceWith(row);
+        if ((info[2] < last_health - 10) && (info[2] != -1)) {
+            $("#sector-player-" + pid).effect(
+                "highlight", {color: "#5C000C"}, 2000);
+        }
+    } else {
+        // New player
+        $("#sector-table tr:last").after(row);
+        $("#sector-player-" + pid).hide();
+        $("#sector-player-" + pid).fadeIn(fade_delay);
+    }
+}
+
+/**
+ * Keeps only the specified players in the sector list.
+ *
+ * @param {Array} player_ids the player ids of the players to keep.
+ */
+function sector_keep_only(player_ids) {
+    $("#sector-table").find("tr:gt(0)").each(function() {
+        // Remove players that left
+        var pid2 = $(this).attr("id").substring(14);
+        if (!_.contains(player_ids, pid2)) {
+            $(this).fadeOut(fade_delay, function() {
+                $(this).remove();
+            });
+        }
+    });
+}
+
+/**
+ * Adds the msg to the chat box.
+ *
+ * @param {Array} msg a message sent by the server
+ */
+function chat_add(msg) {
+    var line = msg["formatstring"].replace(/\<(\w+?)\>/g,
+        function(match, contents, offset, s) {
+            if (contents == "cname") {
+                return "COL" + msg["faction_color"] + msg["name"] + "LOC";
+            } else {
+                return msg[contents];
+            }
+        });
+    line = line.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+    line = "COL" + msg["color"] + line + "LOC";
+    line = line.replace(/COL#(.{6})/g, "<span style=\"color: #$1\">");
+    line = line.replace(/LOC/g, "</span>");
+    $("#chat_box").append(line);
+    $("#chat_box").append("<br />");
+}
+
+/**
+ * Scrolls down the chat box.
+ */
+function chat_scrolldown() {
+    $("#chat_box").scrollTop($("#chat_box")[0].scrollHeight);
+}
+
+// Whether or not to show bots in the sector list.
 var showbots = true;
 
 /**
  * Executes commands sent by the player in VO.
+ *
+ * @param {Object} data the data sent by VO.
  */
 function exec_cmd(data) {
     _.each(data, function(d) {
@@ -125,17 +207,7 @@ function exec_cmd(data) {
 function adjust_dimensions() {
     var height = $(window).height();
     var width = $(window).width();
-    //$(".tabs").height("400px");
-    //$("#sector-table-container").height(height - 130);
-    //$("#sector-table-container").css("min-height", $("#tab-chat").height());
     $("#chat_box").height(height - 250);
-    //$(".tabs").height(height - 130);
-    //$(".content").height(height - 250);
-    //$(".tabs").css("overflow", "auto");
-}
-
-function chat_scrolldown() {
-    $("#chat_box").scrollTop($("#chat_box")[0].scrollHeight);
 }
 
 // Keep track of the last query we received
@@ -154,59 +226,16 @@ function update() {
         _.each(queries, function(data) {
             $.each(data, function(key, value) {
                 if (key == "sector") {
+                    // Hide bots if `showbots` is true.
                     value = _.filter(value, function(p) {
                         return ((showbots) || p[0].substring(0, 1) != "*");
                     });
-                    $.each(value, function(pid, info) {
-                        var row = format_sector_row(pid, info);
 
-                        if ($("#sector-player-" + pid).length != 0) {
-                            // Player exists
-                            var last_health = parseInt($("#sector-player-" + pid).
-                                find("td:nth-child(3)").text());
-                            $("#sector-player-" + pid).replaceWith(row);
-                            if ((info[2] < last_health - 10) && (info[2] != -1)) {
-                                $("#sector-player-" + pid).effect(
-                                    "highlight", {color: "#5C000C"}, 2000);
-                            }
-                        } else {
-                            // New player
-                            $("#sector-table tr:last").after(row);
-                            $("#sector-player-" + pid).hide();
-                            $("#sector-player-" + pid).fadeIn(fade_delay);
-                        }
-                    });
-                    $("#sector-table").find("tr:gt(0)").each(function() {
-                        // Remove players that left
-                        var pid2 = $(this).attr("id").substring(14);
-                        if (!_.contains(_.keys(value), pid2)) {
-                            $(this).fadeOut(fade_delay, function() {
-                                $(this).remove();
-                            });
-                        }
-                    });
+                    $.each(value, sector_add_or_update);
+                    sector_keep_only(_.keys(value));
                 } else if (key == "chat") {
-                    /*
-                     * Update the chat.
-                     */
-
-                    $.each(data[key], function(_, m) {
-                        var line = m["formatstring"].replace(/\<(\w+?)\>/g,
-                            function(match, contents, offset, s) {
-                                if (contents == "cname") {
-                                    return "COL" + m["faction_color"] + m["name"] + "LOC";
-                                } else {
-                                    return m[contents];
-                                }
-                            });
-                        line = line.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
-                        line = "COL" + m["color"] + line + "LOC";
-                        line = line.replace(/COL#(.{6})/g, "<span style=\"color: #$1\">");
-                        line = line.replace(/LOC/g, "</span>");
-                        $("#chat_box").append(line);
-                        $("#chat_box").append("<br />");
-                        chat_scrolldown();
-                    });
+                    _.each(data[key], chat_add);
+                    chat_scrolldown();
                 } else if (key == "player") {
                     $("#player-name").addClass("nation" + data[key][4]);
                     $("#player-name").html(format_player(data[key]));
