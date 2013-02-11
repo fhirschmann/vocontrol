@@ -87,12 +87,16 @@ local function dispatch(root, args)
 end
 
 function cli(data, args)
-    local f = table.remove(args, 1)
-
-    if args and cmd[f] then
-        dispatch(cmd[f], args)
+    if not args then
+        print("vomote: no arguments given - try /vomote help.")
     else
-        print("vomote: invalid argument(s).")
+        local f = table.remove(args, 1)
+
+        if args and cmd[f] then
+            dispatch(cmd[f], args)
+        else
+            print("vomote: invalid argument(s).")
+        end
     end
 end
 
