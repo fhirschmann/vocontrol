@@ -1,9 +1,17 @@
-local voutil = dofile("util.lua")
-local helpdiag = dofile("help.lua")
-vomote = {}
-vomote.VERSION = "experimental"
-vomote.http = dofile("lib/vohttp_packed.lua")
-vomote.util = dofile("util.lua")
+---------------
+-- ## vomote - a remote control plugin for Vendetta Online.
+--
+-- [Github Page](https://github.com/fhirschmann/vomote)
+--
+-- @author Fabian Hirschmann <fabian@hirschm.net>
+-- @copyright 2013
+-- @license MIT/X11
+
+vomote = {
+    VERSION="experimental",
+    http=dofile("lib/vohttp_packed.lua"),
+    util=dofile("util.lua")
+}
 
 if gkini.ReadInt("vomote", "dev", 0) == 1 then
     -- vomote.http needs to be loaded globally in this case
@@ -27,7 +35,7 @@ RegisterEvent(function(event, data)
 local port = gkini.ReadInt("vomote", "port", 9001)
 
 -- CLI
-local cmd = {set={}, reset={}, reload=ReloadInterface, help=helpdiag}
+local cmd = {set={}, reset={}, reload=ReloadInterface, help=dofile("help.lua")}
 
 function cmd.start()
     vomote.DEBUG = gkini.ReadInt("vomote", "debug", 0) == 1
@@ -52,11 +60,11 @@ function cmd.ctrl(...)
 end
 
 for _, opt in pairs({"autostart", "interval", "port", "evqueuesize"}) do
-    cmd.set[opt] = voutil.func.partial(gkini.WriteInt, "vomote")
+    cmd.set[opt] = vomote.util.func.partial(gkini.WriteInt, "vomote")
 end
 
 for _, opt in pairs({"url"}) do
-    cmd.set[opt] = voutil.func.partial(gkini.WriteString, "vomote")
+    cmd.set[opt] = vomote.util.func.partial(gkini.WriteString, "vomote")
 end
 
 --- Dispatches function calls in a DFS-manner
@@ -75,6 +83,7 @@ local function dispatch(root, args)
     end
 end
 
+--- Main entry point for the Command Line Interface (CLI).
 function cli(data, args)
     if not args then
         print("vomote: no arguments given - try /vomote help.")
