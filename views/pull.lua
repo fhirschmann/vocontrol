@@ -12,16 +12,17 @@ end
 RegisterEvent(target, "TARGET_CHANGED")
 
 --- Get info for a player.
--- @return a tuple (name, dist, health, faction_id, faction_name)
+-- @return a tuple (name, dist, health, faction_id, faction_name, guild_tag, ship)
 local function player_info(pid)
+    local av = GetPlayerDistance(pid) or false
     return {
         GetPlayerName(pid),
-        math.ceil(GetPlayerDistance(pid) or -1),
-        math.ceil(GetPlayerHealth(pid)),
+        av and math.ceil(av).."m" or "",
+        av and math.ceil(GetPlayerHealth(pid)) or "",
         GetPlayerFaction(pid),
         FactionName[GetPlayerFaction(pid)],
         GetGuildTag(pid),
-        GetPrimaryShipNameOfPlayer(pid),
+        av and GetPrimaryShipNameOfPlayer(pid) or "",
     }
 end
 

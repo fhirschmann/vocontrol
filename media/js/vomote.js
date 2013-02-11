@@ -89,10 +89,9 @@ function format_sector_row(pid, info) {
     return $.format(
             '<tr id="sector-player-' + pid + '" class="nation{3}">' +
             '<td>' + format_player(info) + '</td>' +
-            '<td>' + ((info[1] == '-1') ? '' : '{1}m') + '</td>' +
-            '<td>{6}</td>' + 
-            '<td class="' + health2color(info[2]) + '">' +
-            ((info[2] == '-1') ? '' : '{2}') + '</td>' +
+            '<td>{1}</td>' +
+            '<td>{6}</td>' +
+            '<td class="' + health2color(info[2]) + '">{2}</td>' +
             '<td>{4}</td>' +
             '</tr>', info);
 }
@@ -127,6 +126,10 @@ function adjust_dimensions() {
     //$(".tabs").height(height - 130);
     //$(".content").height(height - 250);
     //$(".tabs").css("overflow", "auto");
+}
+
+function chat_scrolldown() {
+    $("#chat_box").scrollTop($("#chat_box")[0].scrollHeight);
 }
 
 // Keep track of the last query we received
@@ -193,7 +196,7 @@ function update() {
                         line = line.replace(/LOC/g, "</span>");
                         $("#chat_box").append(line);
                         $("#chat_box").append("<br />");
-                        $("#chat_box").scrollTop($("#chat_box")[0].scrollHeight);
+                        chat_scrolldown();
                     });
                 } else if (key == "player") {
                     $("#player-name").addClass("nation" + data[key][4]);
@@ -293,6 +296,7 @@ $(function() {
         update();
     }, 2000);
     update();
+    chat_scrolldown();
 
     /*
      * Adjust the interface dimensions.
