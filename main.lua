@@ -1,4 +1,5 @@
 local voutil = dofile("util.lua")
+local helpdiag = dofile("help.lua")
 vomote = {}
 vomote.VERSION = "experimental"
 vomote.http = dofile("lib/vohttp_packed.lua")
@@ -65,13 +66,8 @@ end
 -- CLI: Help
 
 function cmd.help()
-    print([[usage: vomote {start,stop,restart,reload,set,help} ...
-    start - start vomote
-    stop - stop vomote
-    restart - restart vomote
-    reload - reload interface
-    ctrl {tab {chat,sector}}
-    set {url,autostart,interval,port,evqueuesize} - set various options]])
+    helpdiag()
+    --helpdiag:showxy(iup.CENTER, iup.CENTER)
 end
 
 --- Dispatches function calls in a DFS-manner
