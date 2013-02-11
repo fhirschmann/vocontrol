@@ -26,11 +26,8 @@ RegisterEvent(function(event, data)
 
 local port = gkini.ReadInt("vomote", "port", 9001)
 
-
 -- CLI
-local cmd = {}
-cmd.set = {}
-cmd.reset = {}
+local cmd = {set={}, reset={}, reload=ReloadInterface, help=helpdiag}
 
 function cmd.start()
     vomote.DEBUG = gkini.ReadInt("vomote", "debug", 0) == 1
@@ -54,20 +51,12 @@ function cmd.ctrl(...)
     end
 end
 
-cmd.reload = ReloadInterface
-
-cmd.set.url = voutil.func.partial(gkini.WriteString, "vomote", "url")
-cmd.reset.url = function() gkini.WriteString("vomote", "url", "") end
-
 for _, opt in pairs({"autostart", "interval", "port", "evqueuesize"}) do
-    cmd.set[opt] = voutil.func.partial(gkini.WriteString, "vomote")
+    cmd.set[opt] = voutil.func.partial(gkini.WriteInt, "vomote")
 end
 
--- CLI: Help
-
-function cmd.help()
-    helpdiag()
-    --helpdiag:showxy(iup.CENTER, iup.CENTER)
+for _, opt in pairs({"url"}) do
+    cmd.set[opt] = voutil.func.partial(gkini.WriteString, "vomote")
 end
 
 --- Dispatches function calls in a DFS-manner
