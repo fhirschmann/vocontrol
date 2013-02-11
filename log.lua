@@ -1,11 +1,20 @@
-local Queue = {}
+---------------
+-- ## Log - a log-like object that has a history.
+--
+-- [Github Page](https://github.com/fhirschmann/vomote)
+--
+-- @author Fabian Hirschmann <fabian@hirschm.net>
+-- @copyright 2013
+-- @license MIT/X11
+
+local Log = {}
 
 --- Creates a new empty queue.
 -- @param max_history the maximum number of queries to keep track of
 -- @return a new queue
-function Queue:new(max_history)
+function Log:new(max_history)
     local new = {}
-    for k, v in pairs(Queue) do
+    for k, v in pairs(Log) do
         new[k] = v
     end
     new:reset()
@@ -17,19 +26,19 @@ function Queue:new(max_history)
 end
 
 --- Resets this queue.
-function Queue:reset()
+function Log:reset()
     self._change = {}
 end
 
 --- Sets the attribute identified by name to value.
-function Queue:set(name, value)
+function Log:set(name, value)
     self._change[name] = value
 end
 
 --- Appends a value of an attribute identified by name.
 -- @param name the name of the attribute
 -- @param value the value
-function Queue:append(name, value)
+function Log:append(name, value)
     local tbl = self._change[name] or {}
     table.insert(tbl, value)
     self._change[name] = tbl
@@ -38,7 +47,7 @@ end
 --- Constructs a subset of this queue containing all events since
 --- the last query.
 -- @param last_query the timestamp of the last query
-function Queue:construct(last_query)
+function Log:construct(last_query)
     if self._past[last_query] then
         return self._past[last_query]
     end
@@ -81,4 +90,4 @@ function Queue:construct(last_query)
     return ret
 end
 
-return Queue
+return Log
