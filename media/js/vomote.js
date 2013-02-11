@@ -165,15 +165,15 @@ function chat_add(msg) {
     line = "COL" + msg["color"] + line + "LOC";
     line = line.replace(/COL#(.{6})/g, "<span style=\"color: #$1\">");
     line = line.replace(/LOC/g, "</span>");
-    $("#chat_box").append(line);
-    $("#chat_box").append("<br />");
+    $("#chat-box").append(line);
+    $("#chat-box").append("<br />");
 }
 
 /**
  * Scrolls down the chat box.
  */
 function chat_scrolldown() {
-    $("#chat_box").scrollTop($("#chat_box")[0].scrollHeight);
+    $("#chat-box").scrollTop($("#chat-box")[0].scrollHeight);
 }
 
 // Whether or not to show bots in the sector list.
@@ -207,7 +207,7 @@ function exec_cmd(data) {
 function adjust_dimensions() {
     var height = $(window).height();
     var width = $(window).width();
-    $("#chat_box").height(height - 250);
+    $("#chat-box").height(height - 250);
 }
 
 // Keep track of the last query we received
@@ -269,7 +269,7 @@ $(function() {
      */
 
     // Add history to the text input
-    $("#chat_msg").inputHistory({size: 30});
+    $("#chat-msg").inputHistory({size: 30});
 
     // Handle the channel selection buttons
     $("#channel-options li").on("click", function(event) {
@@ -279,43 +279,43 @@ $(function() {
     });
 
     // Handle keypresses in the text input
-    $("#chat_form").on("keydown", function(e) {
+    $("#chat-form").on("keydown", function(e) {
         var keyCode = e.keyCode || e.which;
 
         if (keyCode == 9) { // TAB
             // Use VO's autocompletion
             e.preventDefault();
-            var match = $("#chat_msg").val().match(/(\S+)$/);
+            var match = $("#chat-msg").val().match(/(\S+)$/);
             vo("tabcomplete", [match ? match[0] : ""], function(c) {
                 if (c["result"] != null) {
                     var res = c["result"][0];
 
                     // Enclose names with spaces in ""
                     res = res.indexOf(" ") == -1 ? res : '"' + res + '"';
-                    $("#chat_msg").val($("#chat_msg").val().replace(/\w*$/, res));
+                    $("#chat-msg").val($("#chat-msg").val().replace(/\w*$/, res));
                 }
             });
         } else if (keyCode == 13) { // RET
             // Without this, hitting return opens the channel menu for some reason
             event.preventDefault();
             event.stopPropagation();
-            $("#chat_form").submit();
+            $("#chat-form").submit();
         }
     });
 
     // Submit the chat message that is currently in the text input
-    $("#chat_form").submit(function(e) {
+    $("#chat-form").submit(function(e) {
         e.stopImmediatePropagation();
         e.preventDefault();
-        if ($("#chat_msg").val() != "") {
+        if ($("#chat-msg").val() != "") {
             // Don't send empty messages
-            if ($("#chat_msg").val().charAt(0) == "/") {
-                vo("processcmd", [$("#chat_msg").val().slice(1)]);
+            if ($("#chat-msg").val().charAt(0) == "/") {
+                vo("processcmd", [$("#chat-msg").val().slice(1)]);
             } else {
                 var dest = $("#channel-options").find(".active").text().toUpperCase();
-                vo("chat", [$("#chat_msg").val(), dest]);
+                vo("chat", [$("#chat-msg").val(), dest]);
             }
-            $("#chat_msg").val("");
+            $("#chat-msg").val("");
         }
 
         return false;
@@ -324,7 +324,7 @@ $(function() {
     /*
      * Miscellaneous effects.
      */
-    $("#vo_reload").on("click", vo_reload);
+    $("#vo-reload").on("click", vo_reload);
     $("#vo-update").on("click", update);
 
     /*

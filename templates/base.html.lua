@@ -43,7 +43,7 @@ return function(context)
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">Tools <b class="caret"></b></a>
                             <ul class="dropdown-menu">
-                                <li><a href="#" id="vo_reload">Reload Interface</a></li>
+                                <li><a href="#" id="vo-reload">Reload Interface</a></li>
                                 <li><a href="#" id="vo-update">Update Now</a></li>
                             </ul>
                         </li>
@@ -61,8 +61,8 @@ return function(context)
         <div id="tab-chat" class="tabs">
 
 
-            <div id="chat_box" class="well"></div>
-            <form id="chat_form" class="well">
+            <div id="chat-box" class="well"></div>
+            <form id="chat-form" class="well">
                 <fieldset>
                     <div class="input-append input-prepend">
                         <div class="btn-group dropup" id="channel-dropup">
@@ -70,7 +70,7 @@ return function(context)
                                 Channel
                             </button>
 
-                            <input class="input-xxlarge" id="chat_msg" type="text" autocomplete=off \>
+                            <input class="input-xxlarge" id="chat-msg" type="text" autocomplete=off \>
 
                             <ul class="dropdown-menu" id="channel-options">
                                 <li><a href="#">Sector</a></li>

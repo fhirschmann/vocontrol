@@ -18,16 +18,16 @@
     color: #909090;
 }
 
-#chat_box {
+#chat-box {
     overflow: auto;
     margin-bottom: 6px;
 }
 
-#chat_form {
+#chat-form {
     margin: 0;
 }
 
-#chat_msg {
+#chat-msg {
     margin-bottom: 0px;
 }
 
