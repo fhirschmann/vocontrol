@@ -9,6 +9,7 @@ vomote    reload      reload the server (from disk)
 
 vomote    ctrl tab sector          swtiches to the "sector" tab in the browser
 vomote    ctrl tab chat             switches to the "chat" tab in the browser
+vomote    ctrl togglebots          shows/hides bots in the sector tab in the browser
 
 vomote    set url URL                     sets the url for static content to URL
 vomote    set autostart {0,1}           turns autostart on/off

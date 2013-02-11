@@ -96,6 +96,9 @@ function format_sector_row(pid, info) {
             '</tr>', info);
 }
 
+/** Whether or not to show bots in the sector list. */
+var showbots = true;
+
 /**
  * Executes commands sent by the player in VO.
  */
@@ -104,6 +107,9 @@ function exec_cmd(data) {
         switch (d[0]) {
             case "tab":
                 activate_tab(d[1]);
+                break;
+            case "togglebots":
+                showbots = !showbots;
                 break;
         }
     });
@@ -148,6 +154,9 @@ function update() {
         _.each(queries, function(data) {
             $.each(data, function(key, value) {
                 if (key == "sector") {
+                    value = _.filter(value, function(p) {
+                        return ((showbots) || p[0].substring(0, 1) != "*");
+                    });
                     $.each(value, function(pid, info) {
                         var row = format_sector_row(pid, info);
 
