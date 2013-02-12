@@ -31,9 +31,10 @@ RegisterEvent(function(event, data)
 
 -- CLI
 local cmd = {
-    set={},
-    reset={},
-    set=vomote.config.set,
+    config={
+        set=vomote.config.set,
+        get=function(s) print(vomote.config.get(s)) end,
+    },
     reload=ReloadInterface,
     help=dofile("help.lua")}
 
