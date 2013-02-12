@@ -24,10 +24,12 @@ return function()
         iup.vbox{
             iup.stationnameframe{
                 iup.vbox{
-                    iup.stationsubmultiline{
-                        value=help,
-                        expand="YES",
-                        readonly="YES"
+                    iup.pdasubframebg{
+                        iup.stationsubmultiline{
+                            value=help,
+                            expand="YES",
+                            readonly="YES"
+                        },
                     },
                     iup.pdasubsubsubframefull2{
                         iup.hbox{
