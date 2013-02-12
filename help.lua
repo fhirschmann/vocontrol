@@ -1,6 +1,4 @@
 local help = [[
-usage: vomote command
-
 available commands:
 vomote    start        start the server
 vomote    stop         stop the server
@@ -11,12 +9,13 @@ vomote    ctrl tab sector          swtiches to the "sector" tab in the browser
 vomote    ctrl tab chat             switches to the "chat" tab in the browser
 vomote    ctrl togglebots          shows/hides bots in the sector tab in the browser
 
-vomote    set url URL                     sets the url for static content to URL
-vomote    set autostart {0,1}           turns autostart on/off
-vomote    set interval N, N>0           sets the polling interval to N ms
-vomote    set port N, N>1024           sets the port to listen to to N
-vomote    set evqueuesize N, N>0     sets the size of the event queue to N
-vomote    set debug {0,1}                turns debug mode on/off
+vomote    config set url URL                     sets the url for static content to URL
+vomote    config set autostart {0,1}           turns autostart on/off
+vomote    config set interval N, N>0           sets the polling interval to N ms
+vomote    config set port N, N>1024           sets the port to listen to to N
+vomote    config set debug {0,1}                turns debug mode on/off
+
+vomote    config get OPTION                    gets the value of any of the options mentioned above
 ]]
 
 return function()
@@ -37,7 +36,7 @@ return function()
                         }, gap = 5, margin="10x10"
                     }, gap = 5,
                 }
-            }, margin="QUARTERxQUARTER"
+            }, margin="10x10"
         }
     }
 
