@@ -5,7 +5,7 @@ local settings = {
     interval=gkini.ReadInt("vomote", "interval", 2000),
     port=gkini.ReadInt("vomote", "port", 9001),
     debug=gkini.ReadInt("vomote", "debug", 0),
-    url=gkini.ReadString("vomote", "url", ""),
+    url=gkini.ReadString("vomote", "url", "/media"),
 }
 
 function config.get(option)
