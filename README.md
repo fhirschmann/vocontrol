@@ -21,6 +21,7 @@ get you started:
 
     cd ~/.vendetta/plugins
     git clone --recursive git://github.com/fhirschmann/vomote.git
+    export PATH=$PATH:`pwd`/vomote/lib/vohttp/tools
 
     cd vomote
     make
