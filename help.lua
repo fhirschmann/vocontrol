@@ -40,9 +40,6 @@ return function()
             }, margin="QUARTERxQUARTER"
         }
     }
-    local function ret(s)
-        dlg:destroy()
-    end
 
     iup.SetAttributes(dlg,'\
         RESIZE=NO,\
