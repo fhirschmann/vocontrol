@@ -10,16 +10,13 @@
 vomote = {
     VERSION="experimental",
     http=dofile("lib/vohttp_packed.lua"),
-    util=dofile("util.lua")
+    util=dofile("util.lua"),
+    config=dofile("config.lua"),
 }
 
-if gkini.ReadInt("vomote", "dev", 0) == 1 then
-    -- vomote.http needs to be loaded globally in this case
-    vomote.http = vohttp
-end
-
 -- Server setup
-server = vomote.http.Server:new()
+local server = vomote.http.Server:new()
+local port = vomote.config.get("port")
 
 for k, v in pairs(dofile("urls.lua")) do
     server:add_route(k, v)
@@ -32,13 +29,15 @@ RegisterEvent(function(event, data)
         end
     end, "UNLOAD_INTERFACE")
 
-local port = gkini.ReadInt("vomote", "port", 9001)
-
 -- CLI
-local cmd = {set={}, reset={}, reload=ReloadInterface, help=dofile("help.lua")}
+local cmd = {
+    set={},
+    reset={},
+    set=vomote.config.set,
+    reload=ReloadInterface,
+    help=dofile("help.lua")}
 
 function cmd.start()
-    vomote.DEBUG = gkini.ReadInt("vomote", "debug", 0) == 1
     server:start(port)
     print("vomote: now listening on port "..port)
 end
@@ -57,14 +56,6 @@ function cmd.ctrl(...)
     if ... ~= nil then
         ProcessEvent("VOMOTE_CTRL", {...})
     end
-end
-
-for _, opt in pairs({"autostart", "interval", "port", "evqueuesize"}) do
-    cmd.set[opt] = vomote.util.func.partial(gkini.WriteInt, "vomote")
-end
-
-for _, opt in pairs({"url"}) do
-    cmd.set[opt] = vomote.util.func.partial(gkini.WriteString, "vomote")
 end
 
 --- Dispatches function calls in a DFS-manner
@@ -100,6 +91,6 @@ end
 
 RegisterUserCommand("vomote", cli)
 
-if gkini.ReadInt("vomote", "autostart", 0) == 1 then
+if vomote.config.get("autostart") == 1 then
     cmd.start(port)
 end

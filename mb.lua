@@ -18,7 +18,7 @@ function Buffer:new(size)
         new[k] = v
     end
 
-    new._size = size or gkini.ReadInt("vomote", "buffersize", 50)
+    new._size = size or 50
     new:reset()
 
     return new

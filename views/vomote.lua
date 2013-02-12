@@ -1,6 +1,6 @@
 context = {}
-context["URL"] = gkini.ReadString("vomote", "url", "/media")
-context["DEBUG"] = gkini.ReadInt("vomote", "debug", 0) == 1
+context["URL"] = vomote.config.get("url")
+context["DEBUG"] = vomote.config.get("debug")
 
 
 template_base = dofile("templates/base.html.lua")(context)
