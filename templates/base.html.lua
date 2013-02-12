@@ -21,6 +21,9 @@ return function(context)
     <script src="$URL/js/jquery.inputHistory.min.js"></script>
     <script src="$URL/js/jquery-ui-1.10.0.custom.min.js"></script>
     <script src="$URL/js/vomote.js"></script>
+    <script>
+        interval = $INTERVAL;
+    </script>
 </head>
 <body data-spy="scroll" data-target=".navbar">
     <div class="navbar navbar-fixed-top">

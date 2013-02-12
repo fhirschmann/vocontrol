@@ -330,7 +330,7 @@ $(function() {
      */
     setInterval(function() {
         update();
-    }, 2000);
+    }, interval);
     update();
     chat_scrolldown();
 
