@@ -1,14 +1,25 @@
 local help = [[
+This is the vomote help dialog.
+
+If you wish to use vomote, type `/vomote start` now, or set autostart
+to true by typing `/vomote config set autostart 1`.
+
+After you've done so, direct your browser to http://IP:PORT. Vomote
+defaults to using port 9001. Remember to use vomote in trusted networks
+only.
+
 available commands:
 vomote    start        start the server
 vomote    stop         stop the server
 vomote    restart     restart the server
 vomote    reload      reload the server (from disk)
 
-vomote    ctrl tab sector          swtiches to the "sector" tab in the browser
-vomote    ctrl tab chat             switches to the "chat" tab in the browser
-vomote    ctrl togglebots          shows/hides bots in the sector tab in the browser
+commands which impact the current browser view:
+vomote    ctrl tab sector          swtiches to the "sector" tab
+vomote    ctrl tab chat             switches to the "chat" tab
+vomote    ctrl togglebots          shows/hides bots in the sector tab
 
+commands concerned with configuration options:
 vomote    config set url URL                     sets the url for static content to URL
 vomote    config set autostart {0,1}           turns autostart on/off
 vomote    config set interval N, N>0           sets the polling interval to N ms
