@@ -210,8 +210,8 @@ function adjust_dimensions() {
     $("#chat-box").height(height - 250);
 }
 
-// Keep track of the last query we received
-var last_query = null;
+// The session id.
+var session_id = null;
 
 // fade delay for sector listing.
 var fade_delay = 700;
@@ -220,29 +220,27 @@ var fade_delay = 700;
  * Pulls update information from the server and updates the page.
  */
 function update() {
-    $.getJSON("/pull/?last_query=" + last_query, function(queries) {
-        last_query = queries[queries.length - 1]["timestamp"];
+    $.getJSON("/pull/?id=" + session_id, function(data) {
+        session_id = data["id"];
 
-        _.each(queries, function(data) {
-            $.each(data, function(key, value) {
-                if (key == "sector") {
-                    // Hide bots if `showbots` is true.
-                    value = _.filter(value, function(p) {
-                        return ((showbots) || p[0].substring(0, 1) != "*");
-                    });
+        $.each(data, function(key, value) {
+            if (key == "sector") {
+                // Hide bots if `showbots` is true.
+                value = _.filter(value, function(p) {
+                    return ((showbots) || p[0].substring(0, 1) != "*");
+                });
 
-                    $.each(value, sector_add_or_update);
-                    sector_keep_only(_.keys(value));
-                } else if (key == "chat") {
-                    _.each(data[key], chat_add);
-                    chat_scrolldown();
-                } else if (key == "player") {
-                    $("#player-name").addClass("nation" + data[key][4]);
-                    $("#player-name").html(format_player(data[key]));
-                } else if (key == "cmd") {
-                    exec_cmd(data[key]);
-                }
-            });
+                $.each(value, sector_add_or_update);
+                sector_keep_only(_.keys(value));
+            } else if (key == "chat") {
+                _.each(data[key], chat_add);
+                chat_scrolldown();
+            } else if (key == "player") {
+                $("#player-name").addClass("nation" + data[key][4]);
+                $("#player-name").html(format_player(data[key]));
+            } else if (key == "cmd") {
+                exec_cmd(data[key]);
+            }
         });
     });
 }

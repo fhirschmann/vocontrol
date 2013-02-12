@@ -8,19 +8,12 @@
 -- @license MIT/X11
 
 local json = dofile("lib/json.lua")
-local Log = dofile("log.lua")
+local MultiBuffer = dofile("mb.lua")
 
-local log = Log:new()
-local log_volatile = Log:new(3)
-
-
--- Target change
-local function target(event, data)
-    log:set("target", GetTargetInfo())
-end
-RegisterEvent(target, "TARGET_CHANGED")
+local mb = MultiBuffer:new()
 
 --- Get info for a player.
+-- @param pid the player (character) id
 -- @return a tuple (name, dist, health, faction_id, faction_name, guild_tag, ship)
 local function player_info(pid)
     local av = GetPlayerDistance(pid) or false
@@ -36,7 +29,7 @@ local function player_info(pid)
 end
 
 -- Chat Messages
-local function chat(event, data)
+local function event_chat(event, data)
     if not chatinfo[event]["formatstring"] then
         return
     end
@@ -57,20 +50,24 @@ local function chat(event, data)
     if data["color"] then
         add["color"] = data["color"]:sub(2)
     end
-    log:append("chat", add)
+    mb:append("chat", add)
+end
+
+for k, _ in pairs(chatinfo) do
+    RegisterEvent(event_chat, k)
 end
 
 -- Entered game
-local function entered(event, data)
+local function event_charchange(event, data)
     local name = GetPlayerName()
     if name then
-        log:set("player", player_info(GetCharacterIDByName(name)))
+        mb:set("player", player_info(GetCharacterIDByName(name)))
     end
 end
-RegisterEvent(entered, "ENTERED_STATION")
+RegisterEvent(event_charchange, "ENTERED_STATION")
 
 -- Players in the current sector
-local function sector()
+local function sectorinfo()
     local sector = {}
     -- tostring because the json lib is broken
     ForEachPlayer(function(pid)
@@ -78,38 +75,40 @@ local function sector()
             sector[tostring(pid)] = player_info(pid)
         end
     end)
-    log_volatile:set("sector", sector)
+    return sector
 end
+
+-- Target change
+local function event_target(event, data)
+    mb:set("target", GetTargetInfo())
+end
+RegisterEvent(event_target, "TARGET_CHANGED")
 
 -- Commands for the client
-local function clientcmd(event, data)
-    log:append("cmd", data)
+local function event_clientcmd(event, data)
+    mb:append("cmd", data)
 end
-RegisterEvent(clientcmd, "VOMOTE_CTRL")
+RegisterEvent(event_clientcmd, "VOMOTE_CTRL")
 
-for k, _ in pairs(chatinfo) do
-    RegisterEvent(chat, k)
-end
 
 local function serve(req)
-    local last_query = tonumber(req.get_data["last_query"]) or nil
+    local known = mb:get_buffer(tonumber(req.get_data["id"]))
+    local id = known and tonumber(req.get_data["id"]) or mb:add_buffer()
+    local buffer = mb:get_buffer(id)
 
     local r = vomote.http.response.Response:new()
     r.headers["Content-Type"] = "application/json"
     --r.headers["Connection"] = "Keep-Alive"
 
-    sector()
+    local send = {id=id, sector=sectorinfo()}
 
-    if not last_query then
-        entered()
+    if not known then
+        event_charchange()
     end
 
-    local q1 = log:construct(last_query)
-    local q2 = log_volatile:construct(last_query)
+    r.body = json.encode(vomote.util.table.merge(send, buffer:get() or {}))
 
-    r.body = json.encode(vomote.util.table.union(q1, q2))
-
-    log:reset()
+    buffer:reset()
     return r
 end
 
