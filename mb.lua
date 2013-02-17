@@ -41,10 +41,13 @@ function Buffer:append(name, value)
         -- remove the oldest entry
         table.remove(tbl, 1)
 
-        -- shift the table indices down by 1
-        tbl = vomote.util.table.map(function(x)
-            return x - 1
-        end, tbl)
+        -- TODO: This should be a circular buffer
+        -- shift table indices down by 1
+        local tbl2 = {}
+        for k, v in pairs(tbl) do
+            tbl2[k - 1] = v
+        end
+        tbl = tbl2
     end
 
     table.insert(tbl, value)
