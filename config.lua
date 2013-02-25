@@ -1,11 +1,11 @@
 local config = {}
 
 local settings = {
-    autostart=gkini.ReadInt("vomote", "autostart", 0),
-    interval=gkini.ReadInt("vomote", "interval", 2000),
-    port=gkini.ReadInt("vomote", "port", 9001),
-    debug=gkini.ReadInt("vomote", "debug", 0),
-    url=gkini.ReadString("vomote", "url", "/media"),
+    autostart=gkini.ReadInt("vocontrol", "autostart", 0),
+    interval=gkini.ReadInt("vocontrol", "interval", 2000),
+    port=gkini.ReadInt("vocontrol", "port", 9001),
+    debug=gkini.ReadInt("vocontrol", "debug", 0),
+    url=gkini.ReadString("vocontrol", "url", "/media"),
 }
 
 function config.get(option)
@@ -16,9 +16,9 @@ function config.set(option, value)
     settings[option] = value
 
     if type(settings[option]) == "number" then
-        gkini.WriteInt("vomote", option, value)
+        gkini.WriteInt("vocontrol", option, value)
     else
-        gkini.WriteString("vomote", option, value)
+        gkini.WriteString("vocontrol", option, value)
     end
 end
 

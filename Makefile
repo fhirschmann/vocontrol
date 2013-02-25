@@ -14,21 +14,21 @@ encapsulate:
 
 release: vohttp
 	rm -rf _release
-	git checkout-index -f -a --prefix=_release/vomote/
-	cp lib/vohttp_packed.lua _release/vomote/lib
-	make -C _release/vomote/ encapsulate
-	find _release/vomote/media/css -name '*.css' -delete
-	find _release/vomote/media/js -name '*.js' -delete
-	rm -r _release/vomote/lib/vohttp
-	rm _release/vomote/.gitignore
-	rm _release/vomote/.gitmodules
-	mv _release/vomote _release/vomote-$(VERSION)
-	cd _release && zip -r vomote-$(VERSION).zip vomote-$(VERSION)
-	cd _release && tar czf vomote-$(VERSION).tar.gz vomote-$(VERSION)
+	git checkout-index -f -a --prefix=_release/vocontrol/
+	cp lib/vohttp_packed.lua _release/vocontrol/lib
+	make -C _release/vocontrol/ encapsulate
+	find _release/vocontrol/media/css -name '*.css' -delete
+	find _release/vocontrol/media/js -name '*.js' -delete
+	rm -r _release/vocontrol/lib/vohttp
+	rm _release/vocontrol/.gitignore
+	rm _release/vocontrol/.gitmodules
+	mv _release/vocontrol _release/vocontrol-$(VERSION)
+	cd _release && zip -r vocontrol-$(VERSION).zip vocontrol-$(VERSION)
+	cd _release && tar czf vocontrol-$(VERSION).tar.gz vocontrol-$(VERSION)
 
 release-upload:
-	scp _release/vomote-$(VERSION).zip 0x0b.de:/var/www/vomote.0x0b.de/htdocs/releases
-	scp _release/vomote-$(VERSION).tar.gz 0x0b.de:/var/www/vomote.0x0b.de/htdocs/releases
+	scp _release/vocontrol-$(VERSION).zip 0x0b.de:/var/www/vocontrol.0x0b.de/htdocs/releases
+	scp _release/vocontrol-$(VERSION).tar.gz 0x0b.de:/var/www/vocontrol.0x0b.de/htdocs/releases
 
 clean:
 	find media/css -name '*.css.lua' -delete

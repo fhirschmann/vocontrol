@@ -1,7 +1,7 @@
 ---------------
 -- ## URL mappings.
 --
--- [Github Page](https://github.com/fhirschmann/vomote)
+-- [Github Page](https://github.com/fhirschmann/vocontrol)
 --
 -- @author Fabian Hirschmann <fabian@hirschm.net>
 -- @copyright 2013
@@ -9,7 +9,7 @@
 
 urls = {}
 
-urls["/"] = dofile("views/vomote.lua")
+urls["/"] = dofile("views/vocontrol.lua")
 urls["/pull/"] = dofile("views/pull.lua")
 urls["/push/"] = dofile("views/push.lua")
 
@@ -29,14 +29,14 @@ local js = {
     "jquery.jsonrpc.js",
     "jquery.inputHistory.min.js",
     "jquery-ui-1.10.0.custom.min.js",
-    "vomote.js",
+    "vocontrol.js",
 }
 
 for _, f in ipairs(js) do
-    urls["/media/js/"..f] = vomote.http.dispatch.StaticFile:new("media/js/"..f..".lua")
+    urls["/media/js/"..f] = vocontrol.http.dispatch.StaticFile:new("media/js/"..f..".lua")
 end
 for _, f in ipairs(css) do
-    urls["/media/css/"..f] = vomote.http.dispatch.StaticFile:new("media/css/"..f..".lua")
+    urls["/media/css/"..f] = vocontrol.http.dispatch.StaticFile:new("media/css/"..f..".lua")
 end
 
 return urls

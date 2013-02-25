@@ -1,7 +1,7 @@
 ---------------
 -- ## A datatype featuring multiple Buffers.
 --
--- [Github Page](https://github.com/fhirschmann/vomote)
+-- [Github Page](https://github.com/fhirschmann/vocontrol)
 --
 -- @author Fabian Hirschmann <fabian@hirschm.net>
 -- @copyright 2013

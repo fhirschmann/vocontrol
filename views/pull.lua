@@ -1,7 +1,7 @@
 ---------------
 -- ## This view exposes /pull/ which handles pull requests by the browser.
 --
--- [Github Page](https://github.com/fhirschmann/vomote)
+-- [Github Page](https://github.com/fhirschmann/vocontrol)
 --
 -- @author Fabian Hirschmann <fabian@hirschm.net>
 -- @copyright 2013
@@ -96,7 +96,7 @@ local function serve(req)
     local id = known and tonumber(req.get_data["id"]) or mb:add_buffer()
     local buffer = mb:get_buffer(id)
 
-    local r = vomote.http.response.Response:new()
+    local r = vocontrol.http.response.Response:new()
     r.headers["Content-Type"] = "application/json"
     --r.headers["Connection"] = "Keep-Alive"
 
@@ -106,7 +106,7 @@ local function serve(req)
         event_charchange()
     end
 
-    r.body = json.encode(vomote.util.table.merge(send, buffer:get() or {}))
+    r.body = json.encode(vocontrol.util.table.merge(send, buffer:get() or {}))
 
     buffer:reset()
     return r

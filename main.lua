@@ -1,13 +1,13 @@
 ---------------
--- ## vomote - a remote control plugin for Vendetta Online.
+-- ## vocontrol - a remote control plugin for Vendetta Online.
 --
--- [Github Page](https://github.com/fhirschmann/vomote)
+-- [Github Page](https://github.com/fhirschmann/vocontrol)
 --
 -- @author Fabian Hirschmann <fabian@hirschm.net>
 -- @copyright 2013
 -- @license MIT/X11
 
-vomote = {
+vocontrol = {
     VERSION="0.9",
     http=dofile("lib/vohttp_packed.lua"),
     util=dofile("util.lua"),
@@ -15,8 +15,8 @@ vomote = {
 }
 
 -- Server setup
-local server = vomote.http.Server:new()
-local port = vomote.config.get("port")
+local server = vocontrol.http.Server:new()
+local port = vocontrol.config.get("port")
 
 for k, v in pairs(dofile("urls.lua")) do
     server:add_route(k, v)
@@ -32,20 +32,20 @@ RegisterEvent(function(event, data)
 -- CLI
 local cmd = {
     config={
-        set=vomote.config.set,
-        get=function(s) print(vomote.config.get(s)) end,
+        set=vocontrol.config.set,
+        get=function(s) print(vocontrol.config.get(s)) end,
     },
     reload=ReloadInterface,
     help=dofile("help.lua")}
 
 function cmd.start()
     server:start(port)
-    print("vomote: now listening on port "..port)
+    print("vocontrol: now listening on port "..port)
 end
 
 function cmd.stop()
     server:stop()
-    print("vomote: no longer listening on port "..port)
+    print("vocontrol: no longer listening on port "..port)
 end
 
 function cmd.restart()
@@ -68,7 +68,7 @@ local function dispatch(root, args)
         dispatch(root[a], args)
     else
         if type(root) == "table" then
-            print("vomote: incomplete command.")
+            print("vocontrol: incomplete command.")
         else
             root(unpack(args))
         end
@@ -78,20 +78,20 @@ end
 --- Main entry point for the Command Line Interface (CLI).
 function cli(data, args)
     if not args then
-        print("vomote: no arguments given - try /vomote help.")
+        print("vocontrol: no arguments given - try /vocontrol help.")
     else
         local f = table.remove(args, 1)
 
         if args and cmd[f] then
             dispatch(cmd[f], args)
         else
-            print("vomote: invalid argument(s).")
+            print("vocontrol: invalid argument(s).")
         end
     end
 end
 
-RegisterUserCommand("vomote", cli)
+RegisterUserCommand("vocontrol", cli)
 
-if vomote.config.get("autostart") == 1 then
+if vocontrol.config.get("autostart") == 1 then
     cmd.start(port)
 end

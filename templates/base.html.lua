@@ -4,7 +4,7 @@ return function(context)
 <!doctype html>
 <html>
 <head>
-    <title>vomote</title>
+    <title>vocontrol</title>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="$URL/css/bootstrap.min.css" />
@@ -20,7 +20,7 @@ return function(context)
     <script src="$URL/js/jquery.jsonrpc.js"></script>
     <script src="$URL/js/jquery.inputHistory.min.js"></script>
     <script src="$URL/js/jquery-ui-1.10.0.custom.min.js"></script>
-    <script src="$URL/js/vomote.js"></script>
+    <script src="$URL/js/vocontrol.js"></script>
     <script>
         interval = $INTERVAL;
     </script>
@@ -34,7 +34,7 @@ return function(context)
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </a>
-                <a class="brand" href="#top">vomote</a>
+                <a class="brand" href="#top">vocontrol</a>
                 <div class="nav-collapse collapse">
                     <ul class="nav" id="nav-events">
                         <li><a href="#anchor-chat" id="nav-event-chat" class="nav-event-item">Chat</a></li>

@@ -1,7 +1,7 @@
 ---------------
 -- ## This view exposes /push/ which handles commands sent by the browser.
 --
--- [Github Page](https://github.com/fhirschmann/vomote)
+-- [Github Page](https://github.com/fhirschmann/vocontrol)
 --
 -- @author Fabian Hirschmann <fabian@hirschm.net>
 -- @copyright 2013
@@ -10,7 +10,7 @@
 local json = dofile("lib/json.lua")
 
 local METHODS = {
-    reload=function() gkinterface.GKProcessCommand("vomote reload") end,
+    reload=function() gkinterface.GKProcessCommand("vocontrol reload") end,
     target=function(pid) radar.SetRadarSelection(GetPlayerNodeID(pid), GetPrimaryShipIDOfPlayer(pid)) end,
     chat=SendChat,
     tabcomplete=TabCompleteName,
@@ -22,8 +22,9 @@ local function pack(...)
 end
 
 local function serve(req)
+    print(req.post_data)
     local data = json.decode(req.post_data)
-    local response = vomote.http.response.Response:new()
+    local response = vocontrol.http.response.Response:new()
 
     local f = METHODS[data["method"]:sub(4)]
     local serve = {jsonrpc="2.0", id=req.post_data["id"]}
