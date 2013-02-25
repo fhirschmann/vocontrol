@@ -22,7 +22,6 @@ local function pack(...)
 end
 
 local function serve(req)
-    print(req.post_data)
     local data = json.decode(req.post_data)
     local response = vocontrol.http.response.Response:new()
 

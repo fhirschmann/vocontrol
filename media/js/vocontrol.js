@@ -176,9 +176,6 @@ function chat_scrolldown() {
     $("#chat-box").scrollTop($("#chat-box")[0].scrollHeight);
 }
 
-// Whether or not to show bots in the sector list.
-var showbots = true;
-
 /**
  * Executes commands sent by the player in VO.
  *
@@ -225,11 +222,6 @@ function update() {
 
         $.each(data, function(key, value) {
             if (key == "sector") {
-                // Hide bots if `showbots` is true.
-                value = _.filter(value, function(p) {
-                    return ((showbots) || p[0].substring(0, 1) != "*");
-                });
-
                 $.each(value, sector_add_or_update);
                 sector_keep_only(_.keys(value));
             } else if (key == "chat") {

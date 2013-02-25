@@ -66,13 +66,24 @@ local function event_charchange(event, data)
 end
 RegisterEvent(event_charchange, "ENTERED_STATION")
 
+-- Show bots
+local showbots = true
+local function event_togglebots(event, data)
+    if data[1] == "togglebots" then
+        showbots = not showbots
+    end
+end
+RegisterEvent(event_togglebots, "VOMOTE_CTRL")
+
 -- Players in the current sector
 local function sectorinfo()
     local sector = {}
     -- tostring because the json lib is broken
     ForEachPlayer(function(pid)
         if GetPlayerName(pid):sub(0, 20) ~= "(reading transponder" then
-            sector[tostring(pid)] = player_info(pid)
+            if showbots or GetPlayerName(pid):sub(0, 1) ~= "*" then
+                sector[tostring(pid)] = player_info(pid)
+            end
         end
     end)
     return sector
