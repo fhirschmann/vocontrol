@@ -24,9 +24,15 @@ release: vohttp
 	rm _release/vomote/.gitmodules
 	mv _release/vomote _release/vomote-$(VERSION)
 	cd _release && zip -r vomote-$(VERSION).zip vomote-$(VERSION)
+	cd _release && tar czf vomote-$(VERSION).tar.gz vomote-$(VERSION)
+
+release-upload:
+	scp _release/vomote-$(VERSION).zip 0x0b.de:/var/www/vomote.0x0b.de/htdocs/releases
+	scp _release/vomote-$(VERSION).tar.gz 0x0b.de:/var/www/vomote.0x0b.de/htdocs/releases
 
 clean:
 	find media/css -name '*.css.lua' -delete
 	find media/css -name '*.js.lua' -delete
 	make -C lib/vohttp/ clean
 	rm lib/vohttp_packed.lua
+	rm -rf _release

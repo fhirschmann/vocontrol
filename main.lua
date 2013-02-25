@@ -8,7 +8,7 @@
 -- @license MIT/X11
 
 vomote = {
-    VERSION="experimental",
+    VERSION="0.9",
     http=dofile("lib/vohttp_packed.lua"),
     util=dofile("util.lua"),
     config=dofile("config.lua"),
