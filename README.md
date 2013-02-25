@@ -1,5 +1,5 @@
 # vocontrol
-Vomote is an add-on for the video game [Vendetta Online](http://vendetta-online.com) that lets
+Vocontrol is an add-on for the video game [Vendetta Online](http://vendetta-online.com) that lets
 you use additional devices (e.g. a second monitor, a tablet, a phone)
 in order to control certain aspects of the game.
 

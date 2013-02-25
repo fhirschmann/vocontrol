@@ -4,7 +4,7 @@ This is the vocontrol help dialog.
 If you wish to use vocontrol, type `/vocontrol start` now, or set autostart
 to true by typing `/vocontrol config set autostart 1`.
 
-After you've done so, direct your browser to http://IP:PORT. Vomote
+After you've done so, direct your browser to http://IP:PORT. Vocontrol
 defaults to using port 9001. Remember to use vocontrol in trusted networks
 only.
 
