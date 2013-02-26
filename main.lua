@@ -8,7 +8,7 @@
 -- @license MIT/X11
 
 vocontrol = {
-    VERSION="0.9",
+    VERSION="experimental",
     http=dofile("lib/vohttp_packed.lua"),
     util=dofile("util.lua"),
     config=dofile("config.lua"),
