@@ -24,11 +24,13 @@ release: vohttp
 	rm _release/vocontrol/.gitmodules
 	mv _release/vocontrol _release/vocontrol-$(VERSION)
 	cd _release && zip -r vocontrol-$(VERSION).zip vocontrol-$(VERSION)
+	cd _release && gpg --armor --detach-sign vocontrol-$(VERSION).zip
 	cd _release && tar czf vocontrol-$(VERSION).tar.gz vocontrol-$(VERSION)
+	cd _release && gpg --armor --detach-sign vocontrol-$(VERSION).tar.gz
 
 release-upload:
-	scp _release/vocontrol-$(VERSION).zip 0x0b.de:/var/www/vocontrol.0x0b.de/htdocs/releases
-	scp _release/vocontrol-$(VERSION).tar.gz 0x0b.de:/var/www/vocontrol.0x0b.de/htdocs/releases
+	cd _release && scp vocontrol-$(VERSION).zip vocontrol-$(VERSION).zip.asc 0x0b.de:/var/www/dl.0x0b.de/htdocs/vocontrol
+	cd _release && scp vocontrol-$(VERSION).tar.gz vocontrol-$(VERSION).tar.gz.asc 0x0b.de:/var/www/dl.0x0b.de/htdocs/vocontrol
 
 clean:
 	find media/css -name '*.css.lua' -delete
