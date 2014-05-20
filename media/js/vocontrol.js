@@ -1,7 +1,7 @@
 /**
  * Vendetta Online controlled remotely
  *
- * Copyright 2013 Fabian Hirschmann <fabian@hirschm.net>
+ * Copyright 2013 Fabian Hirschmann <fabian@hirschmann.email>
  * Released under the MIT license
  */
 

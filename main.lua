@@ -3,7 +3,7 @@
 --
 -- [Github Page](https://github.com/fhirschmann/vocontrol)
 --
--- @author Fabian Hirschmann <fabian@hirschm.net>
+-- @author Fabian Hirschmann <fabian@hirschmann.email>
 -- @copyright 2013
 -- @license MIT/X11
 
